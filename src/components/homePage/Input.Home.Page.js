@@ -10,11 +10,11 @@ const useStyles = makeStyles((theme) => ({
     },
     circleHome: {
         border: "80px solid #2A66FF",
-        height: "450px",
-        width: "450px",
+        height: "500px",
+        width: "500px",
         borderRadius: "50%",
         position: "absolute",
-        top: "-115px",
+        top: "-150px",
         right: "-80px"
     },
     mainCont: {
@@ -49,8 +49,8 @@ const InputHomePage = (props) => {
         <div className={classes.root}>
             <div className={classes.circleHome} ></div>
             <div className={classes.mainCont} >
-                <div className={classes.inputBox} ></div>
-                <div className={classes.imgBox} ></div>
+                {/* <div className={classes.inputBox} ></div>
+                <div className={classes.imgBox} ></div> */}
             </div>
         </div>
     );

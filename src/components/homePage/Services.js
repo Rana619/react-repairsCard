@@ -26,9 +26,9 @@ const useStyles = makeStyles((theme) => ({
         borderRadius: "36px",
     },
 
-    FirstPhoto :{
-        height : "700px",
-        width : "100%",
+    FirstPhoto: {
+        height: "700px",
+        width: "100%",
     },
 
     btnJoin: {
@@ -44,21 +44,21 @@ const useStyles = makeStyles((theme) => ({
 
 const Services = (props) => {
     const classes = useStyles();
+    const {
+        type, title, desc, btnText, img
+    } = props
 
     return (
         <div className={classes.root}>
             <div className={classes.thirdBox}>
                 <div className={classes.T_leftBox}>
-                    <h3>SEASON OF SAVINGS</h3>
-                    <h2>Long Term Warrinties</h2>
-                    <h4>Phasellus tincidunt hendrerit mi id suscipit. Nullam elementum dictum ipsum, id dignissim eros. Sed iaculis convallis metus, at convallis dui ullamcorper eget. Nam ut aliquet diam. Nam tempor ullamcorper elit ac egestas. Pellentesque consequat interdum ex, volutpat accumsan massa sodales id.
-                    </h4>
-                    <button className={classes.btnJoin} >
-                        JOIN TODAY!
-                    </button>
+                    <h3>{type}</h3>
+                    <h2>{title}</h2>
+                    <h4>{desc}</h4>
+                    <button className={classes.btnJoin} >{btnText}</button>
                 </div>
                 <div className={classes.T_RightBox}>
-             <img className={classes.FirstPhoto} src={FirstPhoto}></img>
+                    <img className={classes.FirstPhoto} src={img} />
                 </div>
             </div>
         </div>
