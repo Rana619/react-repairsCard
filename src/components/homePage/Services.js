@@ -4,23 +4,49 @@ import FirstPhoto from "../svgs/FirstPhoto.svg"
 
 const useStyles = makeStyles((theme) => ({
     thirdBox: {
-        backgroundColor: '#d7ddea',
+      background : "#b8ccfe",
         borderRadius: "36px",
         width: "100%",
         display: "flex",
         alignItems: "center",
         justifyContent: "space-around",
         height: "750px",
-        margin: "60px 60px 0px 0px"
+        margin : "60px 0px"
+       
     },
     T_leftBox: {
         width: "45%",
         height: "700px",
         borderRadius: "36px",
+         marginTop : "350px",
+        
+        "& h3" :{
+            color: "#2A66FF",
+            fontFamily: "poppins",
+            fontWeight : "200px",
+            fontSize : "20px",
+            fontStyle :"normal",
+           
+
+        },
+        "& h2" :{
+            color: "#001F3F",
+            fontFamily: "poppins",
+            fontWeight : "200px",
+            fontSize : "35px",
+            fontStyle :"normal",
+        },
+        "& h4" :{
+            color: "#001F3F",
+            fontFamily: "poppins",
+            fontWeight : "200px",
+            fontSize : "15px",
+            fontStyle :"normal",
+            textAlign :"inherit"
+        }
 
     },
-    T_RightBox: {
-
+    T_RightBox :{
         width: "45%",
         height: "700px",
         borderRadius: "36px",

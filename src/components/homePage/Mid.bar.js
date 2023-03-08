@@ -2,10 +2,11 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Services from "./Services";
 import SecLogo from "../svgs/SecLogo.svg"
-import SecPhoto from "../svgs/SecPhoto.svg"
+import Mask from "../svgs/Mask.png"
 import WheelPhoto from "../svgs/WheelPhoto.svg"
 import EnginePhoto from "../svgs/EnginePhoto.svg"
 import FirstPhoto from "../svgs/FirstPhoto.svg"
+import Ellipse from "../svgs/Ellipse.svg"
 
 const useStyles = makeStyles((theme) => ({
 
@@ -13,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
         padding: "50px 90px"
     },
     firstBox: {
-        backgroundColor: '#d7ddea',
+        backgroundColor: '#b8ccfe',
         borderRadius: "36px",
         width: "100%",
         display: "flex",
@@ -107,21 +108,38 @@ const useStyles = makeStyles((theme) => ({
         width: "45%",
         height: "400px",
         backgroundColor: "white",
-        "& h3": {
+        display : "flex",
+        flexDirection :"column",
+        alignItems : "center",
+        justifyContent :"center",
+        "& h2": {
             fontFamily: "poppins",
+            fontWeight : "600px",
+            fontSize : "47px",
+            fontStyle :"normal",
             color: "#001F3F",
-
+            lineheight :"57px",
+            textAlign : "center"
+            
+        },
+        "& h3" :{
+            fontFamily: "poppins",
+            fontWeight : "200px",
+            fontSize : "20px",
+            fontStyle : "normal",
+            color: "#001F3F",
+            lineheight :"30px",
+            textAlign : "center",
         }
 
     },
     F_leftBox: {
         width: "54%",
         height: "400px",
-        backgroundColor: "green"
 
     },
 
-    SecPhoto: {
+    Mask: {
         width: "100%",
     },
     btnExp: {
@@ -173,7 +191,9 @@ const Midbar = (props) => {
             />
             <div className={classes.fourthBox}>
                 <div className={classes.F_leftBox}>
-                    <img className={classes.SecPhoto} src={SecPhoto}></img>
+               
+                    <img className={classes.Mask} src={Mask}></img>
+                   
                 </div>
                 <div className={classes.F_RightBox}>
                     <h2>
