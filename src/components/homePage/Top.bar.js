@@ -1,11 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import EmailIcon from '@material-ui/icons/Email';
 import RoomIcon from '@material-ui/icons/Room';
 import PhoneIcon from '@material-ui/icons/Phone';
 import { makeStyles } from "@material-ui/core/styles";
+import { useTheme, useMediaQuery, ButtonBase } from "@material-ui/core";
 import mainLogo from "../svgs/mainLogo.svg"
+import MenuIcon from '@material-ui/icons/Menu';
+import CloseIcon from '@material-ui/icons/Close';
+import Drawer from '@material-ui/core/Drawer';
 
 const useStyles = makeStyles((theme) => ({
+    root: {
+        position: "relative",
+        zIndex: "9"
+    },
     topTBar: {
         backgroundColor: '#2A66FF',
         color: "white",
@@ -19,6 +27,11 @@ const useStyles = makeStyles((theme) => ({
             fontWeight: "450",
             alignItems: "center",
             margin: "0px 15px"
+        },
+        [theme.breakpoints.down('xs')]: {
+            "& h3": {
+                display: "none"
+            },
         }
     },
     icontSty: {
@@ -30,7 +43,13 @@ const useStyles = makeStyles((theme) => ({
         display: "flex",
         alignItems: "center",
         justifyContent: "space-around",
-        borderBottom: "0.8px solid #aabed4"
+        borderBottom: "0.8px solid #aabed4",
+        backgroundColor: "white",
+        padding: "10px 0px",
+        [theme.breakpoints.down('sm')]: {
+            justifyContent: "space-between",
+            padding: "10px 20px"
+        }
     },
     leftBar: {
         display: "flex",
@@ -69,12 +88,58 @@ const useStyles = makeStyles((theme) => ({
         padding: "8px 13px",
         borderRadius: "5px",
         border: "none"
-    }
+    },
+    drawerPaper: {
+        width: "50vw",
+        height: "100vh",
+        paddingTop: "20px",
+        display: "flex",
+        alignItems: "center",
+        color: "#2E73F8",
+        flexDirection: "column",
+        // [theme.breakpoints.down("sm")]: {
+        //     height: "calc(100vh - 100px)",
+        //     top: "100px"
+        // },
+        // [theme.breakpoints.down("xs")]: {
+        //     height: "calc(100vh - 85px)",
+        //     top: "85px"
+        // },
+    },
+    logoInDrawer: {
+        display: "flex",
+        justifyContent: "space-between",
+        alignItems: "center",
+    },
+    logoInDrawerAndClose: {
+        display: "flex",
+        justifyContent: "space-between",
+        alignItems: "center",
+        width: "90%"
+    },
+    navDrawerBtn: {
+        padding: "10px",
+        fontSize: "17px",
+        marginRight: "20px",
+        color: "#2A65FD",
+        textDecoration: "none",
+        [theme.breakpoints.down("sm")]: {
+            margin: "5px 0px",
+        },
+    },
 }));
 
 
 const TopBar = (props) => {
     const classes = useStyles();
+    const theme = useTheme();
+    const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+
+    const [openNav, setOpenNav] = useState()
+
+    const handleDrawerToggle = () => {
+        setOpenNav(!openNav)
+    }
 
     return (
         <div className={classes.root}>
@@ -87,20 +152,71 @@ const TopBar = (props) => {
                 <div className={classes.leftBar} >
                     <img className={classes.logoSty} src={mainLogo} alt="logo" />
                     <h3>RepairsCard</h3>
-                    <p>Home</p>
-                    <p>About us</p>
-                    <p>Affiliate</p>
-                    <p>Help</p>
+                    {isMobile ? null : (<>
+                        <p>Home</p>
+                        <p>About us</p>
+                        <p>Affiliate</p>
+                        <p>Help</p>
+                    </>)}
                 </div>
                 <div className={classes.rightBar} >
-                    <p>Account</p>
-                    <p>Login</p>
-                    <p>Signup</p>
-                    <button className={classes.btnSty} >
-                        Book  An Appointment
-                    </button>
+                    {isMobile ? (
+                        <MenuIcon
+                            style={{ color: "#2A66FF", cursor: "pointer" }}
+                            onClick={() => { setOpenNav(true) }}
+                        />
+                    ) : (<>
+                        <p>Account</p>
+                        <p>Login</p>
+                        <p>Signup</p>
+                        <button className={classes.btnSty} >
+                            Book  An Appointment
+                        </button>
+                    </>)}
                 </div>
             </div>
+
+            <Drawer
+                variant="temporary"
+                anchor={"right"}
+                open={openNav}
+                onClose={handleDrawerToggle}
+                classes={{ paper: classes.drawerPaper }}
+                ModalProps={{ keepMounted: true }}
+            >
+                <div className={classes.logoInDrawerAndClose} style={{ marginBottom: "20px" }} >
+                    <div className={classes.logoInDrawer} >
+                    </div>
+                    <CloseIcon
+                        onClick={() => { setOpenNav(false) }}
+                        style={{ fontSize: "25px", cursor: "pointer" }}
+                    />
+                </div>
+                <ButtonBase className={classes.navDrawerBtn}>
+                    Home
+                </ButtonBase>
+                <ButtonBase className={classes.navDrawerBtn}>
+                    About us
+                </ButtonBase>
+                <ButtonBase className={classes.navDrawerBtn}>
+                    Affiliate
+                </ButtonBase>
+                <ButtonBase className={classes.navDrawerBtn}>
+                    Help
+                </ButtonBase>
+                <ButtonBase className={classes.navDrawerBtn}>
+                    Account
+                </ButtonBase>
+                <ButtonBase className={classes.navDrawerBtn}>
+                    Login
+                </ButtonBase>
+                <ButtonBase className={classes.navDrawerBtn}>
+                    Signup
+                </ButtonBase>
+                <button className={classes.btnSty} style={{ marginTop: "20px" }} >
+                    Book  An Appointment
+                </button>
+            </Drawer>
         </div>
     );
 };

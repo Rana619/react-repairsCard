@@ -1,94 +1,75 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import FirstPhoto from "../svgs/FirstPhoto.svg"
 
 const useStyles = makeStyles((theme) => ({
     thirdBox: {
-      background : "#b8ccfe",
-        borderRadius: "36px",
+        background: "#d2ddf8",
+        borderRadius: "30px",
         width: "100%",
         display: "flex",
         alignItems: "center",
-        justifyContent: "space-around",
-        height: "750px",
-        margin : "60px 0px"
-       
+        justifyContent: "space-between",
+        margin: "60px 0px",
+        padding: "20px",
     },
     T_leftBox: {
         width: "45%",
-        height: "700px",
+        height: "600px",
         borderRadius: "36px",
-         marginTop : "350px",
-        
-        "& h3" :{
+        display: "flex",
+        alignItems: "flex-start",
+        justifyContent: "center",
+        flexDirection: "column",
+        paddingLeft: "100px",
+        "& h3": {
             color: "#2A66FF",
-            fontFamily: "poppins",
-            fontWeight : "200px",
-            fontSize : "20px",
-            fontStyle :"normal",
-           
-
+            fontWeight: "510",
+            fontSize: "14px",
         },
-        "& h2" :{
+        "& h2": {
             color: "#001F3F",
-            fontFamily: "poppins",
-            fontWeight : "200px",
-            fontSize : "35px",
-            fontStyle :"normal",
+            fontWeight: "600",
+            fontSize: "35px",
+            marginBottom: "20px"
         },
-        "& h4" :{
+        "& p": {
             color: "#001F3F",
-            fontFamily: "poppins",
-            fontWeight : "200px",
-            fontSize : "15px",
-            fontStyle :"normal",
-            textAlign :"inherit"
+            fontWeight: "490",
+            fontSize: "15px",
         }
-
     },
-    T_RightBox :{
-        width: "45%",
-        height: "700px",
-        borderRadius: "36px",
-    },
-
-    FirstPhoto: {
-        height: "700px",
-        width: "100%",
-    },
-
     btnJoin: {
         backgroundColor: "#2A66FF",
         color: "white",
-        fontSize: "15px",
-        padding: "8px 13px",
+        fontSize: "13px",
+        padding: "12px 30px",
         borderRadius: "5px",
         border: "none",
+        marginTop: "30px"
     },
+    T_RightBox: {
+        width: "40%",
+        height: "600px",
+        borderRadius: "30px",
+    }
 }));
 
 
 const Services = (props) => {
     const classes = useStyles();
-    const {
-        type, title, desc, btnText, img
-    } = props
+    const { type, title, desc, btnText, img } = props
 
     return (
-        <div className={classes.root}>
-            <div className={classes.thirdBox}>
-                <div className={classes.T_leftBox}>
-                    <h3>{type}</h3>
-                    <h2>{title}</h2>
-                    <h4>{desc}</h4>
-                    <button className={classes.btnJoin} >{btnText}</button>
-                </div>
-                <div className={classes.T_RightBox}>
-                    <img className={classes.FirstPhoto} src={img} />
-                </div>
+        <div className={classes.thirdBox}>
+            <div className={classes.T_leftBox}>
+                <h3>{type}</h3>
+                <h2>{title}</h2>
+                <p>{desc}</p>
+                <button className={classes.btnJoin} >{btnText}</button>
+            </div>
+            <div className={classes.T_RightBox} style={{ backgroundImage: `url(${img})` }} >
             </div>
         </div>
     );
 }
-
 export default Services;

@@ -4,23 +4,21 @@ import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        padding: "50px 90px",
+        width: "20%",
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
-        
         "& h3": {
             textAlign: "center",
             color :"#001F3F",
-            fontStyle :"poppins",
+            margin: "10px 0px"
         },
-
         "& h4": {
             textAlign: "center",
             color :"#001F3F",
-            fontStyle :"poppins",
-            fontSize : "15px"
+            fontSize : "14px",
+            fontWeight: "450"
     }
 }
 
@@ -35,7 +33,6 @@ const Importance = (props) => {
 
     return (
         <div className={classes.root}>
-
             {icon}
             <h3>{title}</h3>
             <h4>{desc}</h4>

@@ -12,7 +12,10 @@ import Facility from "./Facility";
 
 
 const useStyles = makeStyles((theme) => ({
-
+    root: {
+        overflowX: "hidden",
+        backgroundColor: "#fbfbfb"
+    }
 
 
 }));
@@ -27,11 +30,11 @@ const HomePage = (props) => {
         <div className={classes.root}>
             <TopBar />
             <InputHomePage />
-            <Midbar/>
-            <DisCover/>
-            <Facility/>
-          
-           
+            <Midbar />
+            <DisCover />
+            <Facility />
+
+
         </div>
     );
 };

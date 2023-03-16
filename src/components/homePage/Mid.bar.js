@@ -7,11 +7,21 @@ import WheelPhoto from "../svgs/WheelPhoto.svg"
 import EnginePhoto from "../svgs/EnginePhoto.svg"
 import FirstPhoto from "../svgs/FirstPhoto.svg"
 import Ellipse from "../svgs/Ellipse.svg"
+import BestServicesCard from "../commonComponents/BestServices.Card";
+import ExperienceCard from "./Experience.Card";
 
 const useStyles = makeStyles((theme) => ({
-
     root: {
-        padding: "50px 90px"
+        padding: "50px 90px",
+        [theme.breakpoints.down('md')]: {
+            padding: "50px 40px",
+        },
+        [theme.breakpoints.down('sm')]: {
+            padding: "50px 20px",
+        },
+        [theme.breakpoints.down('xs')]: {
+            padding: "50px 10px",
+        },
     },
     firstBox: {
         backgroundColor: '#b8ccfe',
@@ -41,21 +51,20 @@ const useStyles = makeStyles((theme) => ({
     },
     SecondBox: {
         backgroundColor: 'white',
-        borderRadius: "36px",
-        borderWidth: "0.8px",
-        borderStyle: "solid",
-        borderColor: "#2A66FFB2",
+        borderRadius: "30px",
+        border: "0.8px solid #2A66FFB2",
         width: "100%",
         display: "flex",
         alignItems: "center",
-        justifyContent: "space-around",
-        height: "500px",
-        margin: "60px 60px 0px 0px"
+        padding: "20px"
     },
     S_leftBox: {
         width: "50%",
-        height: "450px",
+        height: "400px",
         borderRadius: "36px",
+        overflow: "hidden",
+        backgroundSize: "cover",
+        backgroundPosition: "center"
     },
     WheelPhoto: {
         width: "100%",
@@ -71,26 +80,25 @@ const useStyles = makeStyles((theme) => ({
         width: "100%",
     },
     S_RightBox: {
-        width: "45%",
-        height: "450x",
+        width: "30%",
+        height: "400x",
         backgroundColor: "white",
-        borderRadius: "36px",
+        borderRadius: "30px",
+        marginLeft: "60px",
         "& h2": {
-            fontFamily: "poppins",
-            fontStyle: "normal",
-            fontWeight: "600",
-            fontSize: "30px",
+            fontWeight: "650",
+            fontSize: "27px",
             color: "001F3F",
+            marginBottom: "30px"
         }
-
     },
     btnGet: {
-
         backgroundColor: "#2A66FF",
         color: "white",
         fontSize: "15px",
-        padding: "8px 13px",
+        padding: "15px 30px",
         borderRadius: "5px",
+        fontSize: "12px",
         border: "none"
     },
 
@@ -108,28 +116,28 @@ const useStyles = makeStyles((theme) => ({
         width: "45%",
         height: "400px",
         backgroundColor: "white",
-        display : "flex",
-        flexDirection :"column",
-        alignItems : "center",
-        justifyContent :"center",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
         "& h2": {
             fontFamily: "poppins",
-            fontWeight : "600px",
-            fontSize : "47px",
-            fontStyle :"normal",
+            fontWeight: "600px",
+            fontSize: "47px",
+            fontStyle: "normal",
             color: "#001F3F",
-            lineheight :"57px",
-            textAlign : "center"
-            
+            lineheight: "57px",
+            textAlign: "center"
+
         },
-        "& h3" :{
+        "& h3": {
             fontFamily: "poppins",
-            fontWeight : "200px",
-            fontSize : "20px",
-            fontStyle : "normal",
+            fontWeight: "200px",
+            fontSize: "20px",
+            fontStyle: "normal",
             color: "#001F3F",
-            lineheight :"30px",
-            textAlign : "center",
+            lineheight: "30px",
+            textAlign: "center",
         }
 
     },
@@ -149,8 +157,22 @@ const useStyles = makeStyles((theme) => ({
         padding: "8px 13px",
         borderRadius: "5px",
         border: "none",
-    }
+    },
 
+
+
+
+
+    bestServicesCardCont: {
+        width: "100%",
+        display: "flex",
+        alignItems: "center",
+        margin: "100px 0px 30px",
+        [theme.breakpoints.down('sm')]: {
+            flexDirection: "column",
+            justifyContent: "center"
+        }
+    }
 
 }));
 
@@ -160,28 +182,41 @@ const Midbar = (props) => {
 
     return (
         <div className={classes.root}>
-            <div className={classes.firstBox}>
-                <div className={classes.f_leftBox}>
-                    <img className={classes.WheelPhoto} src={WheelPhoto}></img>
-                </div>
-                <div className={classes.f_RightBox}>
-                    <img className={classes.EnginePhoto} src={EnginePhoto}></img>
-                </div>
+            <div className={classes.bestServicesCardCont} >
+                <BestServicesCard
+                    card="left"
+                    image={WheelPhoto}
+                    imageTag={"WHEEL ADJUSTMENT"}
+                    textTag={"BEST SERVICE"}
+                    heading={"Wheel Adjustment"}
+                    text={"We are always help to make one of the best adjustment service"}
+                />
+                <BestServicesCard
+                    card="right"
+                    image={EnginePhoto}
+                    imageTag={"ENGINE SERVICE"}
+                    textTag={"BEST SERVICE"}
+                    heading={"Engine Service"}
+                    text={"We are always help to make one of the best adjustment service"}
+                />
             </div>
+
             <div className={classes.SecondBox}>
-                <div className={classes.S_leftBox}>
-                    <img className={classes.SecLogo} src={SecLogo}></img>
+                <div className={classes.S_leftBox}
+                    style={{ backgroundImage: `url(${SecLogo})` }}
+                >
                 </div>
                 <div className={classes.S_RightBox}>
                     <h2>We Realize That You Lead A
                         Busy Life, So We Have Made
                         It Easy For You To Drop Of
-                        Your Vehicle 24/7.</h2>
+                        Your <span style={{ color: "#2A66FF" }} >Vehicle 24/7.</span> </h2>
                     <button className={classes.btnGet} >
                         GET ESTIMATE
                     </button>
                 </div>
             </div>
+
             <Services
                 type={"SEASON OF SAVINGS"}
                 title={"Long Term Warrinties"}
@@ -189,21 +224,8 @@ const Midbar = (props) => {
                 btnText={"JOIN TODAY!"}
                 img={FirstPhoto}
             />
-            <div className={classes.fourthBox}>
-                <div className={classes.F_leftBox}>
-               
-                    <img className={classes.Mask} src={Mask}></img>
-                   
-                </div>
-                <div className={classes.F_RightBox}>
-                    <h2>
-                        Introducing Repairs Card  Experiences</h2>
-                    <h3>Nam ut aliquet diam. Nam tempor ullamcorper elit ac egestas. Pellentesque consequat interdum ex, volutpat accumsan massa sodales id.</h3>
-                    <button className={classes.btnExp} >
-                        EXPLORE NOW
-                    </button>
-                </div>
-            </div>
+
+            <ExperienceCard />
         </div>
 
     );
