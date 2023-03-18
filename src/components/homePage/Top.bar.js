@@ -97,14 +97,6 @@ const useStyles = makeStyles((theme) => ({
         alignItems: "center",
         color: "#2E73F8",
         flexDirection: "column",
-        // [theme.breakpoints.down("sm")]: {
-        //     height: "calc(100vh - 100px)",
-        //     top: "100px"
-        // },
-        // [theme.breakpoints.down("xs")]: {
-        //     height: "calc(100vh - 85px)",
-        //     top: "85px"
-        // },
     },
     logoInDrawer: {
         display: "flex",

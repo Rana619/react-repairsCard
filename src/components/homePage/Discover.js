@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
+import { useTheme, useMediaQuery } from "@material-ui/core";
 import Services from "./Services";
 import MainPhoto from "../svgs/MainPhoto.svg"
 import tiresPhoto from "../svgs/tiresPhoto.svg"
@@ -9,32 +10,30 @@ import PartsPhoto from "../svgs/PartsPhoto.svg"
 import image1 from "../svgs/Rectangle_81.svg"
 import image2 from "../svgs/Rectangle_78.svg"
 import ImageCont from "../commonComponents/ImageCont";
+import RadioButtonUncheckedIcon from '@material-ui/icons/RadioButtonUnchecked';
+import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    padding: "50px 90px"
-  },
-  imgCont: {
-
-  },
-  imgSty1: {
-    height: "380px",
-    width: "auto",
-    marginRight: "25px",
-    marginBottom: "25px",
-
-  },
-  imgSty2: {
-    height: "300px",
-    width: "auto",
-    marginRight: "35px",
-
+    padding: "50px 90px",
+    [theme.breakpoints.down('md')]: {
+      padding: "50px 40px",
+    },
+    [theme.breakpoints.down('sm')]: {
+      padding: "50px 20px",
+    },
+    [theme.breakpoints.down('xs')]: {
+      padding: "50px 10px",
+    },
   },
   headerSty: {
     color: "#003C8A",
     fontSize: "35px",
     fontWeight: "700",
-    marginBottom: "20px"
+    marginBottom: "40px",
+    [theme.breakpoints.down('sm')]: {
+      textAlign: "center",
+    }
   },
   firstLine: {
     width: "100%",
@@ -69,66 +68,201 @@ const useStyles = makeStyles((theme) => ({
     width: "32%",
     height: "250px"
   },
+  allImageCont: {
+    width: "100%",
+    height: "300px"
+  },
+  dotsCont: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    padding: "20px 0px 0px"
+  },
+  unSelectedDot: {
+    fontSize: "20px",
+    marginRight: "10px",
+    color: "black"
+  },
+  selectedDot: {
+    fontSize: "25px",
+    marginRight: "10px",
+    color: "#2A66FF"
+  },
+  smallImageCard: {
+    width: "100%",
+    height: "100%",
+  }
 }));
 
 
 const DisCover = (props) => {
   const classes = useStyles();
+  const theme = useTheme();
+
+  const [curPhoto, setCurPhoto] = useState(0)
+
+  const isExMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
   return (
     <div className={classes.root}>
-      <h2 className={classes.headerSty} >Discover deals of every type</h2>
+      <h2 className={classes.headerSty} >Discover deals of every type</h2> 
+      {isExMobile ? (<div>
+        <div className={classes.allImageCont} >
+          {curPhoto === 0 && (
+            <div className={classes.smallImageCard} >
+              <ImageCont
+                image={MainPhoto}
+                topTag="BEST DEALS"
+                heading="Maintenance"
+                bottomLine="semper libero. Aenean"
+              />
+            </div>)}
 
-      <div className={classes.imgCont} >
-        <div className={classes.firstLine} >
-          <div className={classes.f1Card} >
-            <ImageCont
-              image={MainPhoto}
-              topTag="BEST DEALS"
-              heading="Maintenance"
-              bottomLine="semper libero. Aenean"
+          {curPhoto === 1 && (
+            <div className={classes.smallImageCard} >
+              <ImageCont
+                image={tiresPhoto}
+                topTag="BEST DEALS"
+                heading="Maintenance"
+                bottomLine="semper libero. Aenean"
+              />
+            </div>)}
+
+          {curPhoto === 2 && (
+            <div className={classes.smallImageCard} >
+              <ImageCont
+                image={OilPhoto}
+                topTag="BEST DEALS"
+                heading="Maintenance"
+                bottomLine="semper libero. Aenean"
+              />
+            </div>)}
+
+          {curPhoto === 3 && (
+            <div className={classes.smallImageCard} >
+              <ImageCont
+                image={ServicesPhoto}
+                topTag="BEST DEALS"
+                heading="Maintenance"
+                bottomLine="semper libero. Aenean"
+              />
+            </div>)}
+
+          {curPhoto === 4 && (
+            <div className={classes.smallImageCard} >
+              <ImageCont
+                image={PartsPhoto}
+                topTag="BEST DEALS"
+                heading="Maintenance"
+                bottomLine="semper libero. Aenean"
+              />
+            </div>)}
+        </div>
+        <div className={classes.dotsCont} >
+          {curPhoto === 0 ? (
+            <FiberManualRecordIcon
+              className={classes.selectedDot}
+              onClick={() => { }}
             />
+          ) : (
+            <RadioButtonUncheckedIcon
+              className={classes.unSelectedDot}
+              onClick={() => { setCurPhoto(0) }}
+            />
+          )}
+          {curPhoto === 1 ? (
+            <FiberManualRecordIcon
+              className={classes.selectedDot}
+              onClick={() => { }}
+            />
+          ) : (
+            <RadioButtonUncheckedIcon
+              className={classes.unSelectedDot}
+              onClick={() => { setCurPhoto(1) }}
+            />
+          )}
+          {curPhoto === 2 ? (
+            <FiberManualRecordIcon
+              className={classes.selectedDot}
+              onClick={() => { }}
+            />
+          ) : (
+            <RadioButtonUncheckedIcon
+              className={classes.unSelectedDot}
+              onClick={() => { setCurPhoto(2) }}
+            />
+          )}
+          {curPhoto === 3 ? (
+            <FiberManualRecordIcon
+              className={classes.selectedDot}
+              onClick={() => { }}
+            />
+          ) : (
+            <RadioButtonUncheckedIcon
+              className={classes.unSelectedDot}
+              onClick={() => { setCurPhoto(3) }}
+            />
+          )}
+          {curPhoto === 4 ? (
+            <FiberManualRecordIcon
+              className={classes.selectedDot}
+              onClick={() => { }}
+            />
+          ) : (
+            <RadioButtonUncheckedIcon
+              className={classes.unSelectedDot}
+              onClick={() => { setCurPhoto(4) }}
+            />
+          )}
+        </div>
+      </div>) : (
+        <div>
+          <div className={classes.firstLine} >
+            <div className={classes.f1Card} >
+              <ImageCont
+                image={MainPhoto}
+                topTag="BEST DEALS"
+                heading="Maintenance"
+                bottomLine="semper libero. Aenean"
+              />
+            </div>
+            <div className={classes.f2Card} >
+              <ImageCont
+                image={tiresPhoto}
+                topTag="BEST DEALS"
+                heading="Maintenance"
+                bottomLine="semper libero. Aenean"
+              />
+            </div>
           </div>
-          <div className={classes.f2Card} >
-            <ImageCont
-              image={tiresPhoto}
-              topTag="BEST DEALS"
-              heading="Maintenance"
-              bottomLine="semper libero. Aenean"
-            />
+          <div className={classes.secondLine} >
+            <div className={classes.s1Card} >
+              <ImageCont
+                image={OilPhoto}
+                topTag="BEST DEALS"
+                heading="Maintenance"
+                bottomLine="semper libero. Aenean"
+              />
+            </div>
+            <div className={classes.s2Card} >
+              <ImageCont
+                image={ServicesPhoto}
+                topTag="BEST DEALS"
+                heading="Maintenance"
+                bottomLine="semper libero. Aenean"
+              />
+            </div>
+            <div className={classes.s3Card} >
+              <ImageCont
+                image={PartsPhoto}
+                topTag="BEST DEALS"
+                heading="Maintenance"
+                bottomLine="semper libero. Aenean"
+              />
+            </div>
           </div>
         </div>
-
-        <div className={classes.secondLine} >
-          <div className={classes.s1Card} >
-            <ImageCont
-              image={OilPhoto}
-              topTag="BEST DEALS"
-              heading="Maintenance"
-              bottomLine="semper libero. Aenean"
-            />
-          </div>
-          <div className={classes.s2Card} >
-            <ImageCont
-              image={ServicesPhoto}
-              topTag="BEST DEALS"
-              heading="Maintenance"
-              bottomLine="semper libero. Aenean"
-            />
-          </div>
-          <div className={classes.s3Card} >
-            <ImageCont
-              image={PartsPhoto}
-              topTag="BEST DEALS"
-              heading="Maintenance"
-              bottomLine="semper libero. Aenean"
-            />
-          </div>
-        </div>
-      </div>
-
-
-
+      )}
       <Services
         type={"SEASON OF SAVINGS"}
         title={"Engine Services"}
@@ -144,8 +278,6 @@ const DisCover = (props) => {
         img={image2}
       />
     </div>
-
   );
 }
-
 export default DisCover;

@@ -1,25 +1,24 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import Services from "./Services";
-import SecLogo from "../svgs/SecLogo.svg"
 import Mask from "../svgs/Mask.png"
-import WheelPhoto from "../svgs/WheelPhoto.svg"
-import EnginePhoto from "../svgs/EnginePhoto.svg"
-import FirstPhoto from "../svgs/FirstPhoto.svg"
-import Ellipse from "../svgs/Ellipse.svg"
-import BestServicesCard from "../commonComponents/BestServices.Card";
-
 
 const useStyles = makeStyles((theme) => ({
     fourthBox: {
         width: "100%",
         display: "flex",
         alignItems: "center",
-        margin: "200px 0px 50px"
+        margin: "200px 0px 50px",
+        [theme.breakpoints.down('sm')]: {
+            flexDirection: "column",
+            justifyContent: "center"
+        }
     },
     F_leftBox: {
         width: "55%",
-        position: "relative"
+        position: "relative",
+        [theme.breakpoints.down('sm')]: {
+            width: "100%",
+        }
     },
     F_RightBox: {
         width: "45%",
@@ -39,7 +38,14 @@ const useStyles = makeStyles((theme) => ({
             fontWeight: "490",
             marginBottom: "20px",
             textAlign: "center"
-        }
+        },
+        [theme.breakpoints.down('sm')]: {  
+            width: "100%",
+            padding: "0px 50px",
+        },
+        [theme.breakpoints.down('xs')]: {
+            padding: "0px 20px",
+        },
     },
     imageSty: {
         width: "100%",
@@ -56,7 +62,7 @@ const useStyles = makeStyles((theme) => ({
         fontSize: "12px",
         border: "none"
     },
-    circleSty:{
+    circleSty: {
         width: "300px",
         height: "300px",
         border: "70px solid #2A66FF",
@@ -64,7 +70,12 @@ const useStyles = makeStyles((theme) => ({
         position: "absolute",
         top: "-40px",
         right: "0px",
-        zIndex: "2"
+        zIndex: "2",
+        [theme.breakpoints.down('xs')]: {
+            width: "170px",
+            height: "170px",
+            border: "40px solid #2A66FF",
+        }
     }
 }));
 
@@ -79,7 +90,6 @@ const ExperienceCard = (props) => {
                 <div className={classes.circleSty} ></div>
             </div>
 
-
             <div className={classes.F_RightBox}>
                 <h2>Introducing Repairs Card  Experiences</h2>
                 <h3>Nam ut aliquet diam. Nam tempor ullamcorper elit ac egestas. Pellentesque consequat interdum ex, volutpat accumsan massa sodales id.</h3>
@@ -87,8 +97,6 @@ const ExperienceCard = (props) => {
                     EXPLORE NOW
                 </button>
             </div>
-
-
         </div>
     );
 }

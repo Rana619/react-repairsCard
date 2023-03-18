@@ -6,25 +6,15 @@ import Midbar from "./Mid.bar";
 import DisCover from "./Discover";
 import Facility from "./Facility";
 
-
-
-
-
-
 const useStyles = makeStyles((theme) => ({
     root: {
         overflowX: "hidden",
         backgroundColor: "#fbfbfb"
     }
-
-
 }));
-
 
 const HomePage = (props) => {
     const classes = useStyles();
-
-    const { } = props
 
     return (
         <div className={classes.root}>
@@ -33,8 +23,6 @@ const HomePage = (props) => {
             <Midbar />
             <DisCover />
             <Facility />
-
-
         </div>
     );
 };

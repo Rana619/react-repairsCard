@@ -2,11 +2,9 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Services from "./Services";
 import SecLogo from "../svgs/SecLogo.svg"
-import Mask from "../svgs/Mask.png"
 import WheelPhoto from "../svgs/WheelPhoto.svg"
 import EnginePhoto from "../svgs/EnginePhoto.svg"
 import FirstPhoto from "../svgs/FirstPhoto.svg"
-import Ellipse from "../svgs/Ellipse.svg"
 import BestServicesCard from "../commonComponents/BestServices.Card";
 import ExperienceCard from "./Experience.Card";
 
@@ -23,32 +21,6 @@ const useStyles = makeStyles((theme) => ({
             padding: "50px 10px",
         },
     },
-    firstBox: {
-        backgroundColor: '#b8ccfe',
-        borderRadius: "36px",
-        width: "100%",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "space-around",
-        height: "400px",
-
-
-    },
-    f_leftBox: {
-        width: "47%",
-        height: "400px",
-        backgroundColor: "white",
-        marginBottom: "80px",
-        borderRadius: "36px",
-    },
-
-    f_RightBox: {
-        width: "47%",
-        height: "400px",
-        backgroundColor: "white",
-        marginBottom: "80px",
-        borderRadius: "36px",
-    },
     SecondBox: {
         backgroundColor: 'white',
         borderRadius: "30px",
@@ -56,7 +28,11 @@ const useStyles = makeStyles((theme) => ({
         width: "100%",
         display: "flex",
         alignItems: "center",
-        padding: "20px"
+        padding: "20px",
+        [theme.breakpoints.down("sm")]: {
+            flexDirection: "column",
+            justifyContent: "center"
+        }
     },
     S_leftBox: {
         width: "50%",
@@ -64,20 +40,10 @@ const useStyles = makeStyles((theme) => ({
         borderRadius: "36px",
         overflow: "hidden",
         backgroundSize: "cover",
-        backgroundPosition: "center"
-    },
-    WheelPhoto: {
-        width: "100%",
-        height: "350px",
-    },
-    EnginePhoto: {
-        width: "100%",
-        height: "350px",
-    },
-
-    SecLogo: {
-        height: "450px",
-        width: "100%",
+        backgroundPosition: "center",
+        [theme.breakpoints.down("sm")]: {
+            width: "100%",
+        }
     },
     S_RightBox: {
         width: "30%",
@@ -90,6 +56,17 @@ const useStyles = makeStyles((theme) => ({
             fontSize: "27px",
             color: "001F3F",
             marginBottom: "30px"
+        },
+        [theme.breakpoints.down("md")]: {
+            width: "40%",
+        },
+        [theme.breakpoints.down("sm")]: {
+            width: "100%",
+            marginLeft: "0px",
+            padding: "15px 20px 10px",
+            "& h2": {
+                fontSize: "20px",
+            },
         }
     },
     btnGet: {
@@ -101,79 +78,16 @@ const useStyles = makeStyles((theme) => ({
         fontSize: "12px",
         border: "none"
     },
-
-
-    fourthBox: {
-        backgroundColor: 'white',
-        width: "100%",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "space-around",
-        height: "600px",
-        margin: "60px 60px 0px 0px"
-    },
-    F_RightBox: {
-        width: "45%",
-        height: "400px",
-        backgroundColor: "white",
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center",
-        "& h2": {
-            fontFamily: "poppins",
-            fontWeight: "600px",
-            fontSize: "47px",
-            fontStyle: "normal",
-            color: "#001F3F",
-            lineheight: "57px",
-            textAlign: "center"
-
-        },
-        "& h3": {
-            fontFamily: "poppins",
-            fontWeight: "200px",
-            fontSize: "20px",
-            fontStyle: "normal",
-            color: "#001F3F",
-            lineheight: "30px",
-            textAlign: "center",
-        }
-
-    },
-    F_leftBox: {
-        width: "54%",
-        height: "400px",
-
-    },
-
-    Mask: {
-        width: "100%",
-    },
-    btnExp: {
-        backgroundColor: "#2A66FF",
-        color: "white",
-        fontSize: "15px",
-        padding: "8px 13px",
-        borderRadius: "5px",
-        border: "none",
-    },
-
-
-
-
-
     bestServicesCardCont: {
         width: "100%",
         display: "flex",
         alignItems: "center",
-        margin: "100px 0px 30px",
+        margin: "100px 0px 70px",
         [theme.breakpoints.down('sm')]: {
             flexDirection: "column",
             justifyContent: "center"
         }
     }
-
 }));
 
 
@@ -200,7 +114,6 @@ const Midbar = (props) => {
                     text={"We are always help to make one of the best adjustment service"}
                 />
             </div>
-
             <div className={classes.SecondBox}>
                 <div className={classes.S_leftBox}
                     style={{ backgroundImage: `url(${SecLogo})` }}
@@ -216,7 +129,6 @@ const Midbar = (props) => {
                     </button>
                 </div>
             </div>
-
             <Services
                 type={"SEASON OF SAVINGS"}
                 title={"Long Term Warrinties"}
@@ -224,11 +136,8 @@ const Midbar = (props) => {
                 btnText={"JOIN TODAY!"}
                 img={FirstPhoto}
             />
-
             <ExperienceCard />
         </div>
-
     );
 }
-
 export default Midbar;

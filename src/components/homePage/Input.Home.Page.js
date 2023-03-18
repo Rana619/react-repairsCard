@@ -5,11 +5,9 @@ import Framefree from "../svgs/Framefree.svg"
 import unselectedMaintainers from "../svgs/unselectedMaintainence.svg"
 import unselectedOilChange from "../svgs/unselectedOilChange.svg"
 import unselectedParts from "../svgs/unselectedParts.svg"
-import { useTheme, useMediaQuery, ButtonBase } from "@material-ui/core";
+import { useTheme, useMediaQuery } from "@material-ui/core";
 import unselectedServices from "../svgs/unselectedServices.svg"
 import unselectedTyres from "../svgs/unselectedTyres.svg"
-// import selectedMaintainers from "../svgs/selectedMaintainence.svg"
-// import selectedOilChange from "../svgs/selectedOilChange.svg"
 import selectedParts from "../svgs/selectedParts.svg"
 import selectedServices from "../svgs/selectedServices.svg"
 import selectedTyres from "../svgs/selectedTyre.svg"
@@ -18,7 +16,6 @@ import OliChanges from "./DifferentInputs/Oli.Change";
 import Services from "./DifferentInputs/Services";
 import Parts from "./DifferentInputs/Parts";
 import Tyres from "./DifferentInputs/Tyres";
-
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -53,7 +50,7 @@ const useStyles = makeStyles((theme) => ({
         zIndex: "2",
         paddingLeft: "120px",
         [theme.breakpoints.down("md")]: {
-            paddingLeft: "80px",
+            paddingLeft: "40px",
         },
         [theme.breakpoints.down("sm")]: {
             height: "auto",
@@ -79,14 +76,17 @@ const useStyles = makeStyles((theme) => ({
             color: "#003C8A"
         },
         [theme.breakpoints.down("sm")]: {
-            height: "120px",
+            height: "250px",
             justifyContent: "center",
             "& > h3": {
                 width: "260px",
                 textAlign: "center",
                 margin: "20px 0px"
             },
-        }
+        },
+        [theme.breakpoints.down("xs")]: {
+            height: "120px"
+        },
     },
     inputBox: {
         width: "60%",
@@ -148,7 +148,7 @@ const useStyles = makeStyles((theme) => ({
             margin: "0px",
             color: "#FFFFFF"
         },
-        [theme.breakpoints.down("sm")]: {
+        [theme.breakpoints.down("md")]: {
             "&  h3": {
                 fontWeight: "600",
                 fontSize: "40px",
@@ -164,6 +164,9 @@ const useStyles = makeStyles((theme) => ({
             width: "auto",
             marginLeft: "20px"
         },
+        [theme.breakpoints.down("md")]: {
+            marginRight: "20px",
+        }
     },
     inputsTopCont: {
         display: "flex",

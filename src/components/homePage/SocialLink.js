@@ -1,10 +1,9 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { colors } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
     footerItems: {
-        width: "250px",
+        width: "100%",
         display: "flex",
         flexWrap: "wrap",
         "& div": {
@@ -12,11 +11,25 @@ const useStyles = makeStyles((theme) => ({
             fontSize: "14px",
             fontWeight: "450",
             margin: "5px 0px"
+        },
+        [theme.breakpoints.down('sm')]: {
+            justifyContent: "space-between",
+            "& div": {
+                width: "100px",
+            },
         }
     },
     socialLink: {
+        width: "250px",
+        marginBottom: "30px",
         "& h3": {
             marginBottom: "25px"
+        },
+        [theme.breakpoints.down('xs')]: {
+            "& h3": {
+                marginBottom: "25px",
+                textAlign: "center",
+            },
         }
     }
 }));
@@ -24,9 +37,7 @@ const useStyles = makeStyles((theme) => ({
 
 const SocialLink = (props) => {
     const classes = useStyles();
-    const {
-        title, list
-    } = props
+    const { title, list } = props
 
     return (
         <div className={classes.socialLink}>

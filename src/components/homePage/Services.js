@@ -3,7 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
     thirdBox: {
-        background: "#d2ddf8",
+        backgroundColor: "#eef1f8",
         borderRadius: "30px",
         width: "100%",
         display: "flex",
@@ -11,6 +11,9 @@ const useStyles = makeStyles((theme) => ({
         justifyContent: "space-between",
         margin: "60px 0px",
         padding: "20px",
+        [theme.breakpoints.down("sm")]: {
+            flexDirection: "column-reverse"
+        }
     },
     T_leftBox: {
         width: "45%",
@@ -36,6 +39,11 @@ const useStyles = makeStyles((theme) => ({
             color: "#001F3F",
             fontWeight: "490",
             fontSize: "15px",
+        },
+        [theme.breakpoints.down("sm")]: {
+            width: "100%",
+            height: "auto",
+            padding: "20px 20px 0px",
         }
     },
     btnJoin: {
@@ -50,7 +58,13 @@ const useStyles = makeStyles((theme) => ({
     T_RightBox: {
         width: "40%",
         height: "600px",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
         borderRadius: "30px",
+        [theme.breakpoints.down("sm")]: {
+            width: "100%",
+            height: "400px",
+        }
     }
 }));
 

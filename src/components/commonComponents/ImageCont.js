@@ -5,6 +5,8 @@ const useStyles = makeStyles((theme) => ({
     root: {
         width: "100%",
         height: "100%",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
         borderRadius: "35px",
         position: "relative",
         overflow: "hidden"

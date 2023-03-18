@@ -5,7 +5,7 @@ const useStyles = makeStyles((theme) => ({
     root: {
         width: "50%",
         height: "450px",
-        backgroundColor: "#d7f0f5",
+        backgroundColor: "#eef1f8",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
@@ -47,6 +47,7 @@ const useStyles = makeStyles((theme) => ({
     },
     detailsCont: {
         padding: "20px",
+        paddingRight: "215px",
         "& h5": {
             color: "#2A66FF"
         },
@@ -55,8 +56,15 @@ const useStyles = makeStyles((theme) => ({
             marginBottom: "10px"
         },
         "& p": {
-
-        }
+            fontSize: "15px",
+            fontWeight: "400",
+        },
+        [theme.breakpoints.down('md')]: {
+            paddingRight: "120px",
+        },
+        [theme.breakpoints.down('xs')]: {
+            paddingRight: "50px",
+        },
     }
 }));
 
