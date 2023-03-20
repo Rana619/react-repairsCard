@@ -48,7 +48,7 @@ const useStyles = makeStyles((theme) => ({
         height: "100%",
         backgroundColor: "rgba(0,0,0,0.0)",
         zIndex: "2",
-        paddingLeft: "120px",
+        paddingLeft: "100px",
         [theme.breakpoints.down("md")]: {
             paddingLeft: "40px",
         },
@@ -184,7 +184,7 @@ const useStyles = makeStyles((theme) => ({
         alignItems: "center",
         justifyContent: "center",
         cursor: "pointer",
-        marginRight: "50px",
+        marginRight: "30px",
         "& div": {
             width: "30px",
             height: "30px",
@@ -196,8 +196,8 @@ const useStyles = makeStyles((theme) => ({
             marginRight: "10px"
         },
         "& img": {
-            width: "18px",
-            height: "18px",
+            width: "17px",
+            height: "17px",
         },
         "& p": {
             color: "#2A66FF",
@@ -234,7 +234,7 @@ const useStyles = makeStyles((theme) => ({
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        marginRight: "50px",
+        marginRight: "30px",
         borderRadius: "15px",
         padding: "1px 10px 1px 0px",
         backgroundColor: "#e7ecf6",
@@ -249,9 +249,9 @@ const useStyles = makeStyles((theme) => ({
             marginRight: "10px"
         },
         "& img": {
-            width: "20px",
+            width: "19px",
             margin: "0px",
-            height: "20px",
+            height: "19px",
         },
         "& p": {
             color: "#2A66FF",

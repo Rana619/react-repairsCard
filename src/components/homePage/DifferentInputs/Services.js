@@ -29,9 +29,8 @@ const useStyles = makeStyles((theme) => ({
         }
     },
     servicesBodyCont: {
-        marginTop: "50px",
+        marginTop: "20px",
         [theme.breakpoints.down('sm')]: {
-            marginTop: "30px",
             width: "100%"
         }
     },
@@ -57,7 +56,6 @@ const Services = (props) => {
             <FormControl
                 component="fieldset"
                 className={classes.singleRadio}
-                style={{ marginTop: "20px" }}
             >
                 <RadioGroup
                     className={classes.optionCont}

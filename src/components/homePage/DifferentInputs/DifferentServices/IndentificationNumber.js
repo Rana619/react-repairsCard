@@ -5,15 +5,20 @@ import { TextField, Button } from '@material-ui/core';
 const useStyles = makeStyles((theme) => ({
     singleFullInput: {
         width: "100%",
-        marginBottom: "35px",
+        marginBottom: "20px",
         [theme.breakpoints.down('sm')]: {
             marginBottom: "20px",
         }
     },
     submitBtn: {
         width: "100%",
-        padding: "10px 0px"
-    }
+        padding: "10px 0px",
+        backgroundColor: "#2A65FA",
+        color: "white",
+        "&:hover":{
+            backgroundColor: "#0b4df5"
+        }
+    },
 }));
 
 
@@ -51,7 +56,6 @@ const IdentificationNumber = (props) => {
 
             <Button
                 variant="contained"
-                color="primary"
                 type="submit"
                 className={classes.submitBtn}
             >

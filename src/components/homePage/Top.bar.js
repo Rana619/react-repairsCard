@@ -42,13 +42,16 @@ const useStyles = makeStyles((theme) => ({
     topMBar: {
         display: "flex",
         alignItems: "center",
-        justifyContent: "space-around",
+        justifyContent: "space-between",
         borderBottom: "0.8px solid #aabed4",
         backgroundColor: "white",
-        padding: "10px 0px",
+        padding: "10px 100px",
+        [theme.breakpoints.down("md")]: {
+            padding: "10px 40px",
+        },
         [theme.breakpoints.down('sm')]: {
             justifyContent: "space-between",
-            padding: "10px 20px"
+            padding: "10px"
         }
     },
     leftBar: {
