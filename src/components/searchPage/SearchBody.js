@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import unselectedMaintainers from "../svgs/unselectedMaintainence.svg"
 import unselectedOilChange from "../svgs/unselectedOilChange.svg"
@@ -11,8 +11,13 @@ import selectedTyres from "../svgs/selectedTyre.svg"
 import { TextField, Button } from '@material-ui/core';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import SearchIcon from '@material-ui/icons/Search';
+import SearchFilter from "../commonComponents/SearchFilter";
+import { filterData } from "../filterData"
 
 const useStyles = makeStyles((theme) => ({
+    root: {
+        overflowX: "hidden",
+    },
     optionAndInputCont: {
         padding: "20px 100px",
         backgroundColor: "#ebebeb",
@@ -195,20 +200,129 @@ const useStyles = makeStyles((theme) => ({
             left: "50vw",
         }
     },
+    contentBody: {
+        padding: "30px 100px"
+    },
+    filterAndCardCont: {
+        width: "100%",
+        display: "flex",
+        alignItems: "flex-start",
+        justifyContent: "space-between"
+    },
+    filterCont: {
+        width: "30%"
+    },
+    cardsCont: {
+        width: "62%"
+    },
+    header: {
+        fontSize: "20px",
+        fontWeight: "650",
+        paddingBottom: "15px",
+        marginBottom: "10px",
+        borderBottom: "1px solid rgba(0, 0, 0, 0.3)"
+    }
 }));
 
 const SearchBody = (props) => {
     const classes = useStyles();
-
 
     const [showPage, setShowPage] = useState("Parts")
     const [license, setLicense] = useState("")
     const [vin, setVIN] = useState("")
     const [vehicle, setVehicle] = useState("")
     const [comment, setComment] = useState("")
+    const [carType, setCarType] = useState([])
+    const [carCompany, setCarCompany] = useState([])
+    const [shuttle, setShuttle] = useState([])
+    const [prices, setPrices] = useState([])
+    const [allCarTypes, setAllCarTypes] = useState(true)
+    const [allCarCompanies, setAllCarCompanies] = useState(true)
+    const [allShuttleTypes, setAllShuttleTypes] = useState(true)
+    const [changeState, setChangeState] = useState(false)
+
+
+    useEffect(() => {
+        const carTypeData = filterData?.carType
+        let carTypeFilter = []
+
+        carTypeData.map((data) => {
+            const subType = data?.subTypes
+            let arr = []
+            subType.map((subData) => {
+                arr.push({
+                    title: subData?.title,
+                    cost: subData?.cost,
+                    selected: false
+                })
+            })
+
+            carTypeFilter.push({
+                title: data?.title,
+                cost: data?.cost,
+                selected: false,
+                openSub: false,
+                subTypes: arr
+            })
+        })
+        setCarType(carTypeFilter)
+
+
+        const carCompanyData = filterData?.carCompany
+        let carCompanyFilter = []
+
+        carCompanyData.map((data) => {
+            carCompanyFilter.push({
+                title: data?.title,
+                cost: data?.cost,
+                selected: false,
+            })
+        })
+        setCarCompany(carCompanyFilter)
+
+
+        const shuttleData = filterData?.shuttle
+        let shuttleFilter = []
+
+        shuttleData.map((data) => {
+            shuttleFilter.push({
+                title: data?.title,
+                cost: data?.cost,
+                selected: false,
+            })
+        })
+        setShuttle(shuttleFilter)
+
+        const pricesFilter = [
+            {
+                title: "$",
+                price: "$ 0-50 Total",
+                selected: false,
+            },
+            {
+                title: "$$",
+                price: "$ 51-100 Total",
+                selected: false,
+            },
+            {
+                title: "$$$",
+                price: "$ 101-200 Total",
+                selected: false,
+            },
+            {
+                title: "$$$$",
+                price: "$ 200 + Total",
+                selected: false,
+            }
+        ]
+        setPrices(pricesFilter)
+    }, [filterData])
+
+
+
 
     return (
-        <div>
+        <div className={classes.root} >
             <div className={classes.optionAndInputCont} >
                 <div className={classes.inputsTopCont} >
                     <div
@@ -269,7 +383,6 @@ const SearchBody = (props) => {
                         <p>Maintenance</p>
                     </div>
                 </div>
-
                 <div className={classes.inputCont} >
                     <TextField
                         id="outlined-basic"
@@ -335,15 +448,46 @@ const SearchBody = (props) => {
                         <SearchIcon />
                     </Button>
                 </div>
-
-
-
-
-
             </div>
+            {/* <div className={classes.circleHome} ></div> */}
+            <div className={classes.contentBody} >
+                <div className={classes.filterAndCardCont} >
+                    <div className={classes.filterCont} >
+                        <SearchFilter
+                            carType={carType}
+                            setCarType={setCarType}
+                            carCompany={carCompany}
+                            setCarCompany={setCarCompany}
+                            shuttle={shuttle}
+                            setShuttle={setShuttle}
+                            changeState={changeState}
+                            setChangeState={setChangeState}
+                            prices={prices}
+                            setPrices={setPrices}
+                            allCarCompanies={allCarCompanies}
+                            setAllCarCompanies={setAllCarCompanies}
+                            allShuttleTypes={allShuttleTypes}
+                            setAllShuttleTypes={setAllShuttleTypes}
+                            allCarTypes={allCarTypes}
+                            setAllCarTypes={setAllCarTypes}
+                        />
+                    </div>
+                    <div className={classes.cardsCont} >
+                        <div className={classes.header} >
+                            Sort By:
+                        </div>
 
-            <div className={classes.circleHome} ></div>
 
+
+
+
+
+
+
+
+                    </div>
+                </div>
+            </div>
         </div>
     );
 };

@@ -8,7 +8,7 @@ import SearchBody from "./SearchBody";
 const useStyles = makeStyles((theme) => ({
     root: {
         overflowX: "hidden",
-        backgroundColor: "#fbfbfb"
+        backgroundColor: "#ffffff"
     }
 }));
 
