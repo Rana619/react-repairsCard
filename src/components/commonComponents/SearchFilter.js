@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
         }
     },
     checkAndArrowIcon: {
-        width: "200px",
+        width: "170px",
         display: "flex",
         alignItems: "center",
         justifyContent: "space-between",

@@ -13,6 +13,7 @@ import Autocomplete from '@material-ui/lab/Autocomplete';
 import SearchIcon from '@material-ui/icons/Search';
 import SearchFilter from "../commonComponents/SearchFilter";
 import { filterData } from "../filterData"
+import SearchResult from "./Search.Result";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -210,10 +211,10 @@ const useStyles = makeStyles((theme) => ({
         justifyContent: "space-between"
     },
     filterCont: {
-        width: "30%"
+        width: "26%"
     },
     cardsCont: {
-        width: "62%"
+        width: "66%"
     },
     header: {
         fontSize: "20px",
@@ -296,21 +297,28 @@ const SearchBody = (props) => {
         const pricesFilter = [
             {
                 title: "$",
+                low: 0,
+                up: 50,
                 price: "$ 0-50 Total",
                 selected: false,
             },
             {
                 title: "$$",
+                low: 51,
+                up: 100,
                 price: "$ 51-100 Total",
                 selected: false,
             },
             {
                 title: "$$$",
+                low: 101,
+                up: 200,
                 price: "$ 101-200 Total",
                 selected: false,
             },
             {
                 title: "$$$$",
+                low: 200,
                 price: "$ 200 + Total",
                 selected: false,
             }
@@ -477,13 +485,16 @@ const SearchBody = (props) => {
                             Sort By:
                         </div>
 
-
-
-
-
-
-
-
+                        <SearchResult
+                            carType={carType}
+                            carCompany={carCompany}
+                            shuttle={shuttle}
+                            changeState={changeState}
+                            prices={prices}
+                            allCarCompanies={allCarCompanies}
+                            allShuttleTypes={allShuttleTypes}
+                            allCarTypes={allCarTypes}
+                        />
 
                     </div>
                 </div>
