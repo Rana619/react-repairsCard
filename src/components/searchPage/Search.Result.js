@@ -67,26 +67,21 @@ const SearchResult = ({
             uperLimit = null
         }
 
-
-        console.log(selectedCarTypes)
-        console.log(selectedShuttleTypes)
-        console.log(selectedCarCompanies)
-        console.log(lowerLimit)
-        console.log(uperLimit)
-
-
-
-
-
-
-
-
-
         if (allCarCompanies && allShuttleTypes && allCarTypes) {
-            locResults = [...carDataArr]
+            carDataArr.map((data) => {
+                if (uperLimit !== null) {
+                    if (data?.price >= lowerLimit && data?.price <= uperLimit) {
+                        locResults.push(data)
+                    }
+                } else {
+                    if (data?.price >= lowerLimit) {
+                        locResults.push(data)
+                    }
+                }
+            })
         } else if (!allCarCompanies && allShuttleTypes && allCarTypes) {
             carDataArr.map((data) => {
-                if (uperLimit) {
+                if (uperLimit !== null) {
                     if (selectedCarCompanies.includes(data?.carCompany) && data?.price >= lowerLimit && data?.price <= uperLimit) {
                         locResults.push(data)
                     }
@@ -98,7 +93,7 @@ const SearchResult = ({
             })
         } else if (allCarCompanies && !allShuttleTypes && allCarTypes) {
             carDataArr.map((data) => {
-                if (uperLimit) {
+                if (uperLimit !== null) {
                     if (selectedShuttleTypes.includes(data?.shuttle) && data?.price >= lowerLimit && data?.price <= uperLimit) {
                         locResults.push(data)
                     }
@@ -110,7 +105,7 @@ const SearchResult = ({
             })
         } else if (allCarCompanies && allShuttleTypes && !allCarTypes) {
             carDataArr.map((data) => {
-                if (uperLimit) {
+                if (uperLimit !== null) {
                     if (selectedCarTypes.includes(data?.subCarType) && data?.price >= lowerLimit && data?.price <= uperLimit) {
                         locResults.push(data)
                     }
@@ -122,7 +117,7 @@ const SearchResult = ({
             })
         } else if (allCarCompanies && !allShuttleTypes && !allCarTypes) {
             carDataArr.map((data) => {
-                if (uperLimit) {
+                if (uperLimit !== null) {
                     if (selectedCarTypes.includes(data?.subCarType) && selectedShuttleTypes.includes(data?.shuttle) && data?.price >= lowerLimit && data?.price <= uperLimit) {
                         locResults.push(data)
                     }
@@ -134,7 +129,7 @@ const SearchResult = ({
             })
         } else if (!allCarCompanies && !allShuttleTypes && allCarTypes) {
             carDataArr.map((data) => {
-                if (uperLimit) {
+                if (uperLimit !== null) {
                     if (selectedCarCompanies.includes(data?.carCompany) && selectedShuttleTypes.includes(data?.shuttle) && data?.price >= lowerLimit && data?.price <= uperLimit) {
                         locResults.push(data)
                     }
@@ -146,7 +141,7 @@ const SearchResult = ({
             })
         } else if (!allCarCompanies && allShuttleTypes && !allCarTypes) {
             carDataArr.map((data) => {
-                if (uperLimit) {
+                if (uperLimit !== null) {
                     if (selectedCarCompanies.includes(data?.carCompany) && selectedCarTypes.includes(data?.subCarType) && data?.price >= lowerLimit && data?.price <= uperLimit) {
                         locResults.push(data)
                     }
@@ -158,7 +153,7 @@ const SearchResult = ({
             })
         } else if (!allCarCompanies && !allShuttleTypes && !allCarTypes) {
             carDataArr.map((data) => {
-                if (uperLimit) {
+                if (uperLimit !== null) {
                     if (selectedCarCompanies.includes(data?.carCompany) && selectedShuttleTypes.includes(data?.shuttle) && selectedCarTypes.includes(data?.subCarType) && data?.price >= lowerLimit && data?.price <= uperLimit) {
                         locResults.push(data)
                     }
@@ -173,9 +168,6 @@ const SearchResult = ({
         setResults(locResults)
     }, [carType, carCompany, shuttle, changeState, prices,
         allCarCompanies, allShuttleTypes, allCarTypes])
-
-
-    console.log(results)
 
     return (
         <div className={classes.root} >
