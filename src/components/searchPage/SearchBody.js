@@ -4,6 +4,7 @@ import unselectedMaintainers from "../svgs/unselectedMaintainence.svg"
 import unselectedOilChange from "../svgs/unselectedOilChange.svg"
 import unselectedParts from "../svgs/unselectedParts.svg"
 import unselectedServices from "../svgs/unselectedServices.svg"
+import { useTheme, useMediaQuery } from "@material-ui/core";
 import unselectedTyres from "../svgs/unselectedTyres.svg"
 import selectedParts from "../svgs/selectedParts.svg"
 import selectedServices from "../svgs/selectedServices.svg"
@@ -25,20 +26,28 @@ const useStyles = makeStyles((theme) => ({
         position: "relative",
         zIndex: "9",
         [theme.breakpoints.down("md")]: {
-            padding: "15px 40px",
+            padding: "15px 20px",
         },
         [theme.breakpoints.down('sm')]: {
-            padding: "10px"
-        }
+            padding: "15px 40px",
+        },
+        [theme.breakpoints.down('xs')]: {
+            padding: "10px",
+        },
+    },
+    inputsTopMainCont: {
+        overflowX: "auto",
+        overflowY: "hidden",
+        "&::-webkit-scrollbar": {
+            display: "none"
+        },
     },
     inputsTopCont: {
         display: "flex",
         alignItems: "center",
         marginBottom: "20px",
-        [theme.breakpoints.down("sm")]: {
-            flexDirection: "column",
-            width: "100%",
-            marginLeft: "0px",
+        [theme.breakpoints.down("md")]: {
+            width: "588px"
         }
     },
     selectedSingleOption: {
@@ -100,10 +109,7 @@ const useStyles = makeStyles((theme) => ({
             },
         },
         [theme.breakpoints.down("sm")]: {
-            width: "100%",
             justifyContent: "flex-start",
-            margin: "0px",
-            marginBottom: "15px"
         }
     },
     singleOption: {
@@ -152,28 +158,46 @@ const useStyles = makeStyles((theme) => ({
             },
         },
         [theme.breakpoints.down("sm")]: {
-            width: "100%",
             justifyContent: "flex-start",
-            margin: "0px",
         }
     },
     inputCont: {
         width: "100%",
         display: "flex",
         alignItems: "center",
-        justifyContent: "space-between"
+        justifyContent: "space-between",
+        [theme.breakpoints.down("sm")]: {
+            flexDirection: "column"
+        }
+
     },
     licensePlateInput: {
-        width: "14%"
+        width: "14%",
+        [theme.breakpoints.down("sm")]: {
+            width: "100%",
+            marginBottom: "10px"
+        }
     },
     vinInput: {
-        width: "26%"
+        width: "26%",
+        [theme.breakpoints.down("sm")]: {
+            width: "100%",
+            marginBottom: "10px"
+        }
     },
     vechicleInput: {
-        width: "14%"
+        width: "14%",
+        [theme.breakpoints.down("sm")]: {
+            width: "100%",
+            marginBottom: "10px"
+        }
     },
     commentsInput: {
-        width: "33%"
+        width: "33%",
+        [theme.breakpoints.down("sm")]: {
+            width: "100%",
+            marginBottom: "10px"
+        }
     },
     searchBtn: {
         width: "60px",
@@ -181,6 +205,9 @@ const useStyles = makeStyles((theme) => ({
         color: "white",
         "&:hover": {
             backgroundColor: "#0b4df5"
+        },
+        [theme.breakpoints.down("sm")]: {
+            width: "100%",
         }
     },
     input: {
@@ -202,19 +229,43 @@ const useStyles = makeStyles((theme) => ({
         }
     },
     contentBody: {
-        padding: "30px 100px"
+        padding: "30px 100px",
+        [theme.breakpoints.down("md")]: {
+            padding: "15px 20px",
+        },
+        [theme.breakpoints.down('sm')]: {
+            padding: "15px 40px",
+        },
+        [theme.breakpoints.down('xs')]: {
+            padding: "10px",
+        },
     },
     filterAndCardCont: {
         width: "100%",
         display: "flex",
         alignItems: "flex-start",
-        justifyContent: "space-between"
+        justifyContent: "space-between",
+        [theme.breakpoints.down('sm')]: {
+            flexDirection: "column",
+        }
     },
     filterCont: {
-        width: "26%"
+        width: "29%",
+        [theme.breakpoints.down("md")]: {
+            width: "32%",
+        },
+        [theme.breakpoints.down('sm')]: {
+            width: "100%",
+        }
     },
     cardsCont: {
-        width: "66%"
+        width: "66%",
+        [theme.breakpoints.down("md")]: {
+            width: "63%",
+        },
+        [theme.breakpoints.down('sm')]: {
+            width: "100%",
+        }
     },
     header: {
         fontSize: "20px",
@@ -227,6 +278,7 @@ const useStyles = makeStyles((theme) => ({
 
 const SearchBody = (props) => {
     const classes = useStyles();
+    const theme = useTheme()
 
     const [showPage, setShowPage] = useState("Parts")
     const [license, setLicense] = useState("")
@@ -242,6 +294,7 @@ const SearchBody = (props) => {
     const [allShuttleTypes, setAllShuttleTypes] = useState(true)
     const [changeState, setChangeState] = useState(false)
 
+    const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
     useEffect(() => {
         const carTypeData = filterData?.carType
@@ -332,65 +385,69 @@ const SearchBody = (props) => {
     return (
         <div className={classes.root} >
             <div className={classes.optionAndInputCont} >
-                <div className={classes.inputsTopCont} >
-                    <div
-                        className={showPage === "Tyres" ? classes.selectedSingleOption : classes.singleOption}
-                        onClick={() => { setShowPage("Tyres") }}
-                    >
-                        <div>
-                            {showPage === "Tyres" ? (
-                                <img src={selectedTyres} />
-                            ) : (
-                                <img src={unselectedTyres} />
-                            )}
+
+                <div className={classes.inputsTopMainCont} >
+                    <div className={classes.inputsTopCont} >
+                        <div
+                            className={showPage === "Tyres" ? classes.selectedSingleOption : classes.singleOption}
+                            onClick={() => { setShowPage("Tyres") }}
+                        >
+                            <div>
+                                {showPage === "Tyres" ? (
+                                    <img src={selectedTyres} />
+                                ) : (
+                                    <img src={unselectedTyres} />
+                                )}
+                            </div>
+                            <p>Tyres</p>
                         </div>
-                        <p>Tyres</p>
-                    </div>
-                    <div
-                        className={showPage === "Parts" ? classes.selectedSingleOption : classes.singleOption}
-                        onClick={() => { setShowPage("Parts") }}
-                    >
-                        <div>
-                            {showPage === "Parts" ? (
-                                <img src={selectedParts} />
-                            ) : (
-                                <img src={unselectedParts} />
-                            )}
+                        <div
+                            className={showPage === "Parts" ? classes.selectedSingleOption : classes.singleOption}
+                            onClick={() => { setShowPage("Parts") }}
+                        >
+                            <div>
+                                {showPage === "Parts" ? (
+                                    <img src={selectedParts} />
+                                ) : (
+                                    <img src={unselectedParts} />
+                                )}
+                            </div>
+                            <p>Parts</p>
                         </div>
-                        <p>Parts</p>
-                    </div>
-                    <div
-                        className={showPage === "Services" ? classes.selectedSingleOption : classes.singleOption}
-                        onClick={() => { setShowPage("Services") }}
-                    >
-                        <div>
-                            {showPage === "Services" ? (
-                                <img src={selectedServices} />
-                            ) : (
-                                <img src={unselectedServices} />
-                            )}
+                        <div
+                            className={showPage === "Services" ? classes.selectedSingleOption : classes.singleOption}
+                            onClick={() => { setShowPage("Services") }}
+                        >
+                            <div>
+                                {showPage === "Services" ? (
+                                    <img src={selectedServices} />
+                                ) : (
+                                    <img src={unselectedServices} />
+                                )}
+                            </div>
+                            <p>Services</p>
                         </div>
-                        <p>Services</p>
-                    </div>
-                    <div
-                        className={showPage === "OliChanges" ? classes.selectedSingleOption : classes.singleOption}
-                        onClick={() => { setShowPage("OliChanges") }}
-                    >
-                        <div>
-                            <img src={unselectedOilChange} />
+                        <div
+                            className={showPage === "OliChanges" ? classes.selectedSingleOption : classes.singleOption}
+                            onClick={() => { setShowPage("OliChanges") }}
+                        >
+                            <div>
+                                <img src={unselectedOilChange} />
+                            </div>
+                            <p>Oli Changes</p>
                         </div>
-                        <p>Oli Changes</p>
-                    </div>
-                    <div
-                        className={showPage === "Maintenance" ? classes.selectedSingleOption : classes.singleOption}
-                        onClick={() => { setShowPage("Maintenance") }}
-                    >
-                        <div>
-                            <img src={unselectedMaintainers} />
+                        <div
+                            className={showPage === "Maintenance" ? classes.selectedSingleOption : classes.singleOption}
+                            onClick={() => { setShowPage("Maintenance") }}
+                        >
+                            <div>
+                                <img src={unselectedMaintainers} />
+                            </div>
+                            <p>Maintenance</p>
                         </div>
-                        <p>Maintenance</p>
                     </div>
                 </div>
+
                 <div className={classes.inputCont} >
                     <TextField
                         id="outlined-basic"
@@ -405,7 +462,7 @@ const SearchBody = (props) => {
                     />
                     <TextField
                         id="outlined-basic"
-                        label="Vehicle Identification Number (VIN)"
+                        label="Vehicle Identification Number"
                         placeholder="Vehicle Identification Number (VIN)"
                         variant="outlined"
                         size="small"
@@ -453,7 +510,7 @@ const SearchBody = (props) => {
                         type="submit"
                         className={classes.searchBtn}
                     >
-                        <SearchIcon />
+                        {isMobile ? "Search" : <SearchIcon />}
                     </Button>
                 </div>
             </div>

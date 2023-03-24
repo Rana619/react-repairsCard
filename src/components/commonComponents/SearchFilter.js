@@ -19,6 +19,14 @@ const useStyles = makeStyles((theme) => ({
         "& h4": {
             fontSize: "15px",
             fontWeight: "450"
+        },
+        [theme.breakpoints.down("md")]: {
+            "& h3": {
+                fontSize: "13px",
+            },
+            "& h4": {
+                fontSize: "13px",
+            },
         }
     },
     checkAndArrowIcon: {
@@ -26,6 +34,9 @@ const useStyles = makeStyles((theme) => ({
         display: "flex",
         alignItems: "center",
         justifyContent: "space-between",
+        [theme.breakpoints.down("md")]: {
+            width: "155px", 
+        }
     },
     checkAndTitleCont: {
         display: "flex",
@@ -41,6 +52,15 @@ const useStyles = makeStyles((theme) => ({
         paddingBottom: "15px",
         marginBottom: "10px",
         borderBottom: "1px solid rgba(0, 0, 0, 0.3)"
+    },
+    filterBoxPadding: {
+        padding: "0px 15px 30px",
+        [theme.breakpoints.down('md')]: {
+            padding: "0px 5px 30px",
+        },
+        [theme.breakpoints.down('sm')]: {
+            padding: "0px 0px 30px",
+        },
     }
 }));
 
@@ -227,7 +247,7 @@ const SearchFilter = ({
             <div className={classes.header} >
                 Car Type
             </div>
-            <div style={{ padding: "0px 15px 30px" }} >
+            <div className={classes.filterBoxPadding} >
                 <div className={classes.singleFilterLine} >
                     <div className={classes.checkAndArrowIcon} >
                         <div className={classes.checkAndTitleCont} >
@@ -323,7 +343,7 @@ const SearchFilter = ({
             <div className={classes.header} >
                 Price
             </div>
-            <div style={{ padding: "0px 15px 30px" }} >
+            <div className={classes.filterBoxPadding} >
                 {prices.map((price, index) => (
                     <div className={classes.singleFilterLine} >
                         <div className={classes.checkAndArrowIcon} >
@@ -346,7 +366,7 @@ const SearchFilter = ({
             <div className={classes.header} >
                 Car Company
             </div>
-            <div style={{ padding: "0px 15px 30px" }} >
+            <div className={classes.filterBoxPadding} >
                 <div className={classes.singleFilterLine} >
                     <div className={classes.checkAndArrowIcon} >
                         <div className={classes.checkAndTitleCont} >
@@ -390,7 +410,7 @@ const SearchFilter = ({
             <div className={classes.header} >
                 Shuttle
             </div>
-            <div style={{ padding: "0px 15px 30px" }} >
+            <div className={classes.filterBoxPadding} >
                 <div className={classes.singleFilterLine} >
                     <div className={classes.checkAndArrowIcon} >
                         <div className={classes.checkAndTitleCont} >

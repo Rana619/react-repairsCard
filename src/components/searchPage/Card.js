@@ -14,7 +14,10 @@ const useStyles = makeStyles((theme) => ({
         marginTop: "25px",
         display: "flex",
         alignItems: "flex-start",
-        justifyContent: "space-between"
+        justifyContent: "space-between",
+        [theme.breakpoints.down("xs")]: {
+            flexDirection: "column"
+        }
     },
     leftPart: {
         width: "28%",
@@ -44,6 +47,18 @@ const useStyles = makeStyles((theme) => ({
             padding: "3px 0px",
             backgroundColor: "#c8d5f5",
             color: "#2A66FF"
+        },
+        [theme.breakpoints.down("md")]: {
+            paddingRight: "5px",
+            "& h3": {
+                fontSize: "22px"
+            },
+            "& p": {
+                fontSize: "18px"
+            },
+        },
+        [theme.breakpoints.down("xs")]: {
+            width: "100%"
         }
     },
     midPart: {
@@ -59,6 +74,20 @@ const useStyles = makeStyles((theme) => ({
             fontSize: "16px",
             fontWeight: "450",
             marginTop: "7px"
+        },
+        [theme.breakpoints.down("md")]: {
+            padding: "0px 5px",
+            "& h3": {
+                fontSize: "17px"
+            },
+            "& p": {
+                fontSize: "14px"
+            },
+        },
+        [theme.breakpoints.down("xs")]: {
+            width: "100%",
+            border: "none",
+            margin: "15px 0px"
         }
     },
     fCont: {
@@ -80,7 +109,8 @@ const useStyles = makeStyles((theme) => ({
     aCont: {
         backgroundColor: "black",
         borderRadius: "50%",
-        padding: "0px 7px 2px",
+        fontSize: "13px",
+        padding: "0px 6px 3px",
         color: "white"
     },
     featureCont: {
@@ -102,12 +132,21 @@ const useStyles = makeStyles((theme) => ({
             fontWeight: "500",
             color: "#00AA00",
             marginBottom: "12px"
+        },
+        [theme.breakpoints.down("md")]: {
+            paddingLeft: "5px",
+            "& h3": {
+                fontSize: "14px",
+            },
+        },
+        [theme.breakpoints.down("xs")]: {
+            width: "100%"
         }
     },
     singLockCont: {
         width: "100%",
-        padding: "7px",
-        borderRadius: "4px",
+        padding: "7px 11px",
+        borderRadius: "10px",
         backgroundColor: "#2A65FA",
         color: "white",
         display: "flex",
@@ -115,9 +154,21 @@ const useStyles = makeStyles((theme) => ({
         justifyContent: "space-between",
         marginBottom: "15px",
         "& p": {
-            fontSize: "14px",
+            fontSize: "16px",
             fontWeight: "700"
-        }
+        },
+        [theme.breakpoints.down("md")]: {
+            padding: "7px",
+            "& p": {
+                fontSize: "11px",
+            },
+        },
+        [theme.breakpoints.down("sm")]: {
+            justifyContent: "center",
+            "& p": {
+                fontSize: "14px",
+            },
+        },
     },
     saleCont: {
         padding: "0px 0px 2px",
@@ -133,16 +184,22 @@ const useStyles = makeStyles((theme) => ({
     realPrice: {
         fontSize: "21px",
         fontWeight: "450",
-        textDecoration: "line-through"
+        marginBottom: "4px",
+        [theme.breakpoints.down("md")]: {
+            fontSize: "19px",
+        }
     },
     price: {
-        fontSize: "27px",
-        color: "#00AA00"
+        fontSize: "30px",
+        color: "#00AA00",
+        [theme.breakpoints.down("md")]: {
+            fontSize: "23px",
+        }
     },
-    payBtn:{
+    payBtn: {
         width: "100%",
         textAlign: "center",
-        fontSize: "19px",
+        fontSize: "23px",
         fontWeight: "600",
         borderRadius: "15px",
         backgroundColor: "#00AA00;",
@@ -189,7 +246,7 @@ const Card = ({ cardData }) => {
                     </div>
                 </div>
 
-                <div style={{ marginTop: "40px" }} >
+                <div style={{ marginTop: "55px" }} >
                     {cardData?.features.map((feature) => (<div className={classes.featureCont} >
                         <CheckIcon style={{ color: "#00AA00", fontSize: "20px" }} />
                         <p>{feature}</p>
@@ -204,11 +261,32 @@ const Card = ({ cardData }) => {
                 </div>
 
                 <h3>FREE CANCELLATION</h3>
-
                 <div className={classes.saleCont} >Sale</div>
 
-                <div className={classes.realPrice} >$ <b>{cardData?.realPrice}</b> Total</div>
-                <div className={classes.price} >$ <b>{cardData?.price}</b> Total</div>
+                <div className={classes.realPrice} >
+                    <span
+                        style={{
+                            fontSize: "18px",
+                            fontWeight: "500",
+                            marginRight: "5px"
+                        }}
+                    >$</span>
+                    <span style={{ textDecoration: "line-through" }} ><b>{cardData?.realPrice}</b> Total</span>
+                </div>
+
+                <div className={classes.price} >
+                    <span
+                        style={{
+                            fontSize: "18px",
+                            fontWeight: "500",
+                            position: "relative",
+                            top: "-10px",
+                            marginRight: "3px"
+                        }}
+                    >$</span>
+                    <b>{cardData?.price}</b>
+                    Total
+                </div>
 
                 <button className={classes.payBtn} >
                     Pay Later
