@@ -5,6 +5,9 @@ import Checkbox from '@material-ui/core/Checkbox';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ExpandLessIcon from '@material-ui/icons/ExpandLess';
 import IndeterminateCheckBoxOutlinedIcon from '@material-ui/icons/IndeterminateCheckBoxOutlined';
+import Drawer from '@material-ui/core/Drawer';
+import CloseIcon from '@material-ui/icons/Close';
+import { IconButton } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
     singleFilterLine: {
@@ -35,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
         alignItems: "center",
         justifyContent: "space-between",
         [theme.breakpoints.down("md")]: {
-            width: "155px", 
+            width: "155px",
         }
     },
     checkAndTitleCont: {
@@ -51,7 +54,13 @@ const useStyles = makeStyles((theme) => ({
         fontWeight: "650",
         paddingBottom: "15px",
         marginBottom: "10px",
-        borderBottom: "1px solid rgba(0, 0, 0, 0.3)"
+        borderBottom: "1px solid rgba(0, 0, 0, 0.3)",
+        [theme.breakpoints.down('sm')]: {
+            fontSize: "18px",
+            fontWeight: "600",
+            paddingBottom: "5px",
+            marginLeft: "10px"
+        }
     },
     filterBoxPadding: {
         padding: "0px 15px 30px",
@@ -61,6 +70,28 @@ const useStyles = makeStyles((theme) => ({
         [theme.breakpoints.down('sm')]: {
             padding: "0px 0px 30px",
         },
+    },
+    drawerPaper: {
+        width: "280px",
+        height: "100vh",
+        paddingBottom: "30px"
+    },
+    filterHeader: {
+        width: "100%",
+        backgroundColor: "#2A65FA",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "space-between",
+        padding: "0px 5px",
+        paddingLeft: "15px",
+        marginBottom: "20px",
+        fontSize: "20px",
+        color: "white"
+    },
+    filterSubCont: {
+        [theme.breakpoints.down('sm')]: {
+            display: "none"
+        }
     }
 }));
 
@@ -69,7 +100,7 @@ const SearchFilter = ({
     shuttle, setShuttle, changeState, setChangeState,
     prices, setPrices, allCarCompanies, setAllCarCompanies,
     allShuttleTypes, setAllShuttleTypes, allCarTypes,
-    setAllCarTypes
+    setAllCarTypes, opneFilter, setOpneFilter
 }) => {
     const classes = useStyles();
 
@@ -241,215 +272,237 @@ const SearchFilter = ({
         return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     }
 
+    const handleDrawerToggle = () => {
+        setOpneFilter(false)
+    }
 
-    return (
-        <div>
-            <div className={classes.header} >
-                Car Type
-            </div>
-            <div className={classes.filterBoxPadding} >
-                <div className={classes.singleFilterLine} >
-                    <div className={classes.checkAndArrowIcon} >
-                        <div className={classes.checkAndTitleCont} >
-                            {allCarTypes ? (
-                                <Checkbox
-                                    checked={allCarTypes}
-                                    color="primary"
-                                />
-                            ) : (
-                                <IndeterminateCheckBoxOutlinedIcon
-                                    onClick={() => { onClickAllCarTypes() }}
-                                    style={{ margin: "9px", color: "#2A66FF", cursor: "pointer" }}
-                                />
-                            )}
-                            <h3 style={{ fontWeight: "500" }} >All Car Types</h3>
-                        </div>
-                        <div></div>
-                    </div>
-                    <h4 style={{ fontWeight: "500" }} >From</h4>
-                </div>
-
-
-                {carType.map((carTypeData, index) => {
-                    if (carTypeData?.subTypes.length === 0) {
-                        return (
-                            <div className={classes.singleFilterLine} >
-                                <div className={classes.checkAndArrowIcon} >
-                                    <div className={classes.checkAndTitleCont} >
-                                        <Checkbox
-                                            checked={carTypeData?.selected}
-                                            onChange={() => { onClickMainCheckBox(index) }}
-                                            color="primary"
-                                        />
-                                        <h3>{carTypeData?.title}</h3>
-                                    </div>
-                                    <div></div>
-                                </div>
-                                <h4>$ {numberWithCommas(carTypeData?.cost)} Total</h4>
-                            </div>
-                        )
-                    } else {
-                        return (<div>
-                            <div className={classes.singleFilterLine} >
-                                <div className={classes.checkAndArrowIcon} >
-                                    <div className={classes.checkAndTitleCont} >
-                                        <Checkbox
-                                            checked={carTypeData?.selected}
-                                            onChange={() => { onClickMainCheckBox(index) }}
-                                            color="primary"
-                                        />
-                                        <h3>{carTypeData?.title}</h3>
-                                    </div>
-                                    {carTypeData?.openSub ? (
-                                        <ExpandLessIcon
-                                            onClick={() => { openSub(index) }}
-                                            style={{ cursor: 'pointer' }}
-                                        />
-                                    ) : (
-                                        <ExpandMoreIcon
-                                            onClick={() => { openSub(index) }}
-                                            style={{ cursor: 'pointer' }}
-                                        />
-                                    )}
-                                </div>
-                                <h4>$ {numberWithCommas(carTypeData?.cost)} Total</h4>
-                            </div>
-                            <Collapse in={carTypeData?.openSub} >
-                                <div className={classes.subCont} >
-                                    {carTypeData?.subTypes && carTypeData?.subTypes.map((subData, i) => (
-                                        <div className={classes.singleFilterLine} >
-                                            <div className={classes.checkAndArrowIcon} >
-                                                <div className={classes.checkAndTitleCont} >
-                                                    <Checkbox
-                                                        checked={subData?.selected}
-                                                        onChange={() => { onClickSubCheckBox(index, i) }}
-                                                        color="primary"
-                                                    />
-                                                    <h3>{subData?.title}</h3>
-                                                </div>
-                                                <div></div>
-                                            </div>
-                                            <h4>$ {numberWithCommas(subData?.cost)} Total</h4>
-                                        </div>
-                                    ))}
-                                </div>
-                            </Collapse>
-                        </div>)
-                    }
-                })}
-            </div>
-
-
-            <div className={classes.header} >
-                Price
-            </div>
-            <div className={classes.filterBoxPadding} >
-                {prices.map((price, index) => (
-                    <div className={classes.singleFilterLine} >
-                        <div className={classes.checkAndArrowIcon} >
-                            <div className={classes.checkAndTitleCont} >
-                                <Checkbox
-                                    checked={price?.selected}
-                                    onChange={() => { onClickPrice(index) }}
-                                    color="primary"
-                                />
-                                <h3>{price?.title}</h3>
-                            </div>
-                            <div></div>
-                        </div>
-                        <h4>{price?.price}</h4>
-                    </div>
-                ))}
-            </div>
-
-
-            <div className={classes.header} >
-                Car Company
-            </div>
-            <div className={classes.filterBoxPadding} >
-                <div className={classes.singleFilterLine} >
-                    <div className={classes.checkAndArrowIcon} >
-                        <div className={classes.checkAndTitleCont} >
-                            {allCarCompanies ? (
-                                <Checkbox
-                                    checked={allCarCompanies}
-                                    color="primary"
-                                />
-                            ) : (
-                                <IndeterminateCheckBoxOutlinedIcon
-                                    onClick={() => { onClickAllCarCompanies() }}
-                                    style={{ margin: "9px", color: "#2A66FF", cursor: "pointer" }}
-                                />
-                            )}
-                            <h3 style={{ fontWeight: "500" }} >All Car Companies</h3>
-                        </div>
-                        <div></div>
-                    </div>
-                    <h4 style={{ fontWeight: "500" }} >From</h4>
-                </div>
-
-                {carCompany.map((data, index) => (
-                    <div className={classes.singleFilterLine} >
-                        <div className={classes.checkAndArrowIcon} >
-                            <div className={classes.checkAndTitleCont} >
-                                <Checkbox
-                                    checked={data?.selected}
-                                    onChange={() => { onClickCarCompany(index) }}
-                                    color="primary"
-                                />
-                                <h3>{data?.title}</h3>
-                            </div>
-                            <div></div>
-                        </div>
-                        <h4>$ {numberWithCommas(data?.cost)} Total</h4>
-                    </div>
-                ))}
-            </div>
-
-
-            <div className={classes.header} >
-                Shuttle
-            </div>
-            <div className={classes.filterBoxPadding} >
-                <div className={classes.singleFilterLine} >
-                    <div className={classes.checkAndArrowIcon} >
-                        <div className={classes.checkAndTitleCont} >
-                            {allShuttleTypes ? (
-                                <Checkbox
-                                    checked={allShuttleTypes}
-                                    color="primary"
-                                />
-                            ) : (
-                                <IndeterminateCheckBoxOutlinedIcon
-                                    onClick={() => { onClickAllShuttle() }}
-                                    style={{ margin: "9px", color: "#2A66FF", cursor: "pointer" }}
-                                />
-                            )}
-                            <h3 style={{ fontWeight: "500" }} >All Shuttle Types</h3>
-                        </div>
-                        <div></div>
-                    </div>
-                    <h4 style={{ fontWeight: "500" }} >From</h4>
-                </div>
-
-                {shuttle.map((data, index) => (
-                    <div className={classes.singleFilterLine} >
-                        <div className={classes.checkAndArrowIcon} >
-                            <div className={classes.checkAndTitleCont} >
-                                <Checkbox
-                                    checked={data?.selected}
-                                    onChange={() => { onClickShuttle(index) }}
-                                    color="primary"
-                                />
-                                <h3>{data?.title}</h3>
-                            </div>
-                            <div></div>
-                        </div>
-                        <h4>$ {numberWithCommas(data?.cost)} Total</h4>
-                    </div>
-                ))}
-            </div>
+    const FilterMainCont = <>
+        <div className={classes.header} >
+            Car Type
         </div>
-    );
+        <div className={classes.filterBoxPadding} >
+            <div className={classes.singleFilterLine} >
+                <div className={classes.checkAndArrowIcon} >
+                    <div className={classes.checkAndTitleCont} >
+                        {allCarTypes ? (
+                            <Checkbox
+                                checked={allCarTypes}
+                                color="primary"
+                            />
+                        ) : (
+                            <IndeterminateCheckBoxOutlinedIcon
+                                onClick={() => { onClickAllCarTypes() }}
+                                style={{ margin: "9px", color: "#2A66FF", cursor: "pointer" }}
+                            />
+                        )}
+                        <h3 style={{ fontWeight: "500" }} >All Car Types</h3>
+                    </div>
+                    <div></div>
+                </div>
+                <h4 style={{ fontWeight: "500" }} >From</h4>
+            </div>
+
+
+            {carType.map((carTypeData, index) => {
+                if (carTypeData?.subTypes.length === 0) {
+                    return (
+                        <div className={classes.singleFilterLine} >
+                            <div className={classes.checkAndArrowIcon} >
+                                <div className={classes.checkAndTitleCont} >
+                                    <Checkbox
+                                        checked={carTypeData?.selected}
+                                        onChange={() => { onClickMainCheckBox(index) }}
+                                        color="primary"
+                                    />
+                                    <h3>{carTypeData?.title}</h3>
+                                </div>
+                                <div></div>
+                            </div>
+                            <h4>$ {numberWithCommas(carTypeData?.cost)} Total</h4>
+                        </div>
+                    )
+                } else {
+                    return (<div>
+                        <div className={classes.singleFilterLine} >
+                            <div className={classes.checkAndArrowIcon} >
+                                <div className={classes.checkAndTitleCont} >
+                                    <Checkbox
+                                        checked={carTypeData?.selected}
+                                        onChange={() => { onClickMainCheckBox(index) }}
+                                        color="primary"
+                                    />
+                                    <h3>{carTypeData?.title}</h3>
+                                </div>
+                                {carTypeData?.openSub ? (
+                                    <ExpandLessIcon
+                                        onClick={() => { openSub(index) }}
+                                        style={{ cursor: 'pointer' }}
+                                    />
+                                ) : (
+                                    <ExpandMoreIcon
+                                        onClick={() => { openSub(index) }}
+                                        style={{ cursor: 'pointer' }}
+                                    />
+                                )}
+                            </div>
+                            <h4>$ {numberWithCommas(carTypeData?.cost)} Total</h4>
+                        </div>
+                        <Collapse in={carTypeData?.openSub} >
+                            <div className={classes.subCont} >
+                                {carTypeData?.subTypes && carTypeData?.subTypes.map((subData, i) => (
+                                    <div className={classes.singleFilterLine} >
+                                        <div className={classes.checkAndArrowIcon} >
+                                            <div className={classes.checkAndTitleCont} >
+                                                <Checkbox
+                                                    checked={subData?.selected}
+                                                    onChange={() => { onClickSubCheckBox(index, i) }}
+                                                    color="primary"
+                                                />
+                                                <h3>{subData?.title}</h3>
+                                            </div>
+                                            <div></div>
+                                        </div>
+                                        <h4>$ {numberWithCommas(subData?.cost)} Total</h4>
+                                    </div>
+                                ))}
+                            </div>
+                        </Collapse>
+                    </div>)
+                }
+            })}
+        </div>
+
+        <div className={classes.header} >
+            Price
+        </div>
+        <div className={classes.filterBoxPadding} >
+            {prices.map((price, index) => (
+                <div className={classes.singleFilterLine} >
+                    <div className={classes.checkAndArrowIcon} >
+                        <div className={classes.checkAndTitleCont} >
+                            <Checkbox
+                                checked={price?.selected}
+                                onChange={() => { onClickPrice(index) }}
+                                color="primary"
+                            />
+                            <h3>{price?.title}</h3>
+                        </div>
+                        <div></div>
+                    </div>
+                    <h4>{price?.price}</h4>
+                </div>
+            ))}
+        </div>
+
+        <div className={classes.header} >
+            Car Company
+        </div>
+        <div className={classes.filterBoxPadding} >
+            <div className={classes.singleFilterLine} >
+                <div className={classes.checkAndArrowIcon} >
+                    <div className={classes.checkAndTitleCont} >
+                        {allCarCompanies ? (
+                            <Checkbox
+                                checked={allCarCompanies}
+                                color="primary"
+                            />
+                        ) : (
+                            <IndeterminateCheckBoxOutlinedIcon
+                                onClick={() => { onClickAllCarCompanies() }}
+                                style={{ margin: "9px", color: "#2A66FF", cursor: "pointer" }}
+                            />
+                        )}
+                        <h3 style={{ fontWeight: "500" }} >All Car Companies</h3>
+                    </div>
+                    <div></div>
+                </div>
+                <h4 style={{ fontWeight: "500" }} >From</h4>
+            </div>
+
+            {carCompany.map((data, index) => (
+                <div className={classes.singleFilterLine} >
+                    <div className={classes.checkAndArrowIcon} >
+                        <div className={classes.checkAndTitleCont} >
+                            <Checkbox
+                                checked={data?.selected}
+                                onChange={() => { onClickCarCompany(index) }}
+                                color="primary"
+                            />
+                            <h3>{data?.title}</h3>
+                        </div>
+                        <div></div>
+                    </div>
+                    <h4>$ {numberWithCommas(data?.cost)} Total</h4>
+                </div>
+            ))}
+        </div>
+
+        <div className={classes.header} >
+            Shuttle
+        </div>
+        <div className={classes.filterBoxPadding} >
+            <div className={classes.singleFilterLine} >
+                <div className={classes.checkAndArrowIcon} >
+                    <div className={classes.checkAndTitleCont} >
+                        {allShuttleTypes ? (
+                            <Checkbox
+                                checked={allShuttleTypes}
+                                color="primary"
+                            />
+                        ) : (
+                            <IndeterminateCheckBoxOutlinedIcon
+                                onClick={() => { onClickAllShuttle() }}
+                                style={{ margin: "9px", color: "#2A66FF", cursor: "pointer" }}
+                            />
+                        )}
+                        <h3 style={{ fontWeight: "500" }} >All Shuttle Types</h3>
+                    </div>
+                    <div></div>
+                </div>
+                <h4 style={{ fontWeight: "500" }} >From</h4>
+            </div>
+
+            {shuttle.map((data, index) => (
+                <div className={classes.singleFilterLine} >
+                    <div className={classes.checkAndArrowIcon} >
+                        <div className={classes.checkAndTitleCont} >
+                            <Checkbox
+                                checked={data?.selected}
+                                onChange={() => { onClickShuttle(index) }}
+                                color="primary"
+                            />
+                            <h3>{data?.title}</h3>
+                        </div>
+                        <div></div>
+                    </div>
+                    <h4>$ {numberWithCommas(data?.cost)} Total</h4>
+                </div>
+            ))}
+        </div>
+    </>
+
+    return (<>
+        <div className={classes.filterSubCont} >
+            {FilterMainCont}
+        </div>
+        <Drawer
+            variant="temporary"
+            anchor={"right"}
+            open={opneFilter}
+            onClose={handleDrawerToggle}
+            classes={{ paper: classes.drawerPaper }}
+            ModalProps={{ keepMounted: true }}
+        >
+            <div className={classes.filterHeader} >
+                <span>Filter</span>
+                <IconButton onClick={handleDrawerToggle} >
+                    <CloseIcon style={{ color: "white", fontSize: "25px" }} />
+                </IconButton>
+            </div>
+            <div style={{ paddingRight: "10px" }} >
+                {FilterMainCont}
+            </div>
+        </Drawer>
+    </>);
 };
 export default SearchFilter;

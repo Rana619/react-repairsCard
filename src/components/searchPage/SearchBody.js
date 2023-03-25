@@ -15,6 +15,8 @@ import SearchIcon from '@material-ui/icons/Search';
 import SearchFilter from "../commonComponents/SearchFilter";
 import { filterData } from "../filterData"
 import SearchResult from "./Search.Result";
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import FilterListIcon from '@material-ui/icons/FilterList';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -245,9 +247,6 @@ const useStyles = makeStyles((theme) => ({
         display: "flex",
         alignItems: "flex-start",
         justifyContent: "space-between",
-        [theme.breakpoints.down('sm')]: {
-            flexDirection: "column",
-        }
     },
     filterCont: {
         width: "29%",
@@ -255,7 +254,8 @@ const useStyles = makeStyles((theme) => ({
             width: "32%",
         },
         [theme.breakpoints.down('sm')]: {
-            width: "100%",
+            width: "0px",
+            overflow: "hidden",
         }
     },
     cardsCont: {
@@ -273,6 +273,22 @@ const useStyles = makeStyles((theme) => ({
         paddingBottom: "15px",
         marginBottom: "10px",
         borderBottom: "1px solid rgba(0, 0, 0, 0.3)"
+    },
+    movileHeader: {
+        display: "flex",
+        alignItems: "center",
+        "& div": {
+            display: "flex",
+            alignItems: "center",
+            border: "1px solid #2A65FA",
+            borderRadius: "15px",
+            padding: "3px 10px",
+            marginRight: "15px",
+            color: "#2A65FA"
+        },
+        "& span": {
+            marginTop: "-4px"
+        }
     }
 }));
 
@@ -293,6 +309,8 @@ const SearchBody = (props) => {
     const [allCarCompanies, setAllCarCompanies] = useState(true)
     const [allShuttleTypes, setAllShuttleTypes] = useState(true)
     const [changeState, setChangeState] = useState(false)
+    const [opneFilter, setOpneFilter] = useState(false)
+
 
     const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
@@ -535,12 +553,26 @@ const SearchBody = (props) => {
                             setAllShuttleTypes={setAllShuttleTypes}
                             allCarTypes={allCarTypes}
                             setAllCarTypes={setAllCarTypes}
+                            opneFilter={opneFilter}
+                            setOpneFilter={setOpneFilter}
                         />
                     </div>
                     <div className={classes.cardsCont} >
-                        <div className={classes.header} >
-                            Sort By:
-                        </div>
+                        {isMobile ? (<div className={classes.movileHeader} >
+                            <div style={{ backgroundColor: "#e2e2f4" }} >
+                                <span style={{ marginRight: "5px" }} >Sort By </span>
+                                <ExpandMoreIcon />
+                            </div>
+                            <div onClick={() => { setOpneFilter(true) }} >
+                                <FilterListIcon />
+                                <span style={{ marginLeft: "5px" }} >All Filters</span>
+                            </div>
+                        </div>) : (
+                            <div className={classes.header} >
+                                Sort By:
+                            </div>
+
+                        )}
 
                         <SearchResult
                             carType={carType}
