@@ -4,7 +4,7 @@ import { carDataArr } from "../dummyData"
 import Card from "./Card";
 
 const useStyles = makeStyles((theme) => ({
-    root: {
+    root: { 
         width: "100%",
     }
 }));

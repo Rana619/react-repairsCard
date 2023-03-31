@@ -4,6 +4,7 @@ import PersonIcon from '@material-ui/icons/Person';
 import LocalMallIcon from '@material-ui/icons/LocalMall';
 import CheckIcon from '@material-ui/icons/Check';
 import LockIcon from '@material-ui/icons/Lock';
+import { useNavigate } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -22,6 +23,7 @@ const useStyles = makeStyles((theme) => ({
     leftPart: {
         width: "28%",
         paddingRight: "20px",
+        cursor: "pointer",
         "& img": {
             width: "100%",
             height: "auto",
@@ -64,6 +66,7 @@ const useStyles = makeStyles((theme) => ({
     midPart: {
         width: "44%",
         padding: "0px 15px",
+        cursor: "pointer",
         borderLeft: "1px solid rgba(0, 0, 0, 0.2)",
         borderRight: "1px solid rgba(0, 0, 0, 0.2)",
         "& h3": {
@@ -212,12 +215,12 @@ const useStyles = makeStyles((theme) => ({
 
 const Card = ({ cardData }) => {
     const classes = useStyles();
-
+    const navigate = useNavigate();
 
 
     return (
         <div className={classes.root} >
-            <div className={classes.leftPart} >
+            <div className={classes.leftPart} onClick={() => { navigate(`/deal-details/${cardData?._id}`) }} >
                 <img src={cardData?.photo} />
 
                 <h3>{cardData?.title}</h3>
@@ -227,7 +230,7 @@ const Card = ({ cardData }) => {
                     <div>FEATURED</div>
                 )}
             </div>
-            <div className={classes.midPart} >
+            <div className={classes.midPart} onClick={() => { navigate(`/deal-details/${cardData?._id}`) }} >
                 <h3>{cardData?.name}</h3>
                 <p>{cardData?.name}</p>
 
