@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { TextField, Button } from '@material-ui/core';
 import Autocomplete from '@material-ui/lab/Autocomplete';
+import { useNavigate } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
     inputCont: {
@@ -35,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
         padding: "10px 0px",
         backgroundColor: "#2A65FA",
         color: "white",
-        "&:hover":{
+        "&:hover": {
             backgroundColor: "#0b4df5"
         }
     },
@@ -49,15 +50,30 @@ const useStyles = makeStyles((theme) => ({
 
 const Parts = (props) => {
     const classes = useStyles();
+    const navigate = useNavigate();
 
     const [license, setLicense] = useState("")
     const [VIN, setVIN] = useState("")
     const [vehicle, setVehicle] = useState("")
     const [desc, setDesc] = useState("")
 
+    const onSubmitFun = (e) => {
+        e.preventDefault()
+        const data = {
+            type: "Parts",
+            license,
+            VIN,
+            vehicle,
+            desc
+        };
+        const searchParams = new URLSearchParams(data);
+        const url = "search/?" + searchParams;
+
+        navigate(url)
+    }
 
     return (
-        <form className={classes.formCont} >
+        <form className={classes.formCont} onSubmit={onSubmitFun} >
             <div className={classes.inputCont} >
                 <TextField
                     id="outlined-basic"
@@ -131,7 +147,6 @@ const Parts = (props) => {
             >
                 Search
             </Button>
-
         </form>
     );
 };

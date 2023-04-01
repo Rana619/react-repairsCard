@@ -18,8 +18,8 @@ const SearchPage = (props) => {
     return (
         <div className={classes.root}>
             <TopBar />
-            <SearchBody/>
-            <Facility />    
+            <SearchBody />
+            <Facility />
         </div>
     );
 };

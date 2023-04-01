@@ -8,6 +8,7 @@ import mainLogo from "../svgs/mainLogo.svg"
 import MenuIcon from '@material-ui/icons/Menu';
 import CloseIcon from '@material-ui/icons/Close';
 import Drawer from '@material-ui/core/Drawer';
+import { useNavigate } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -63,6 +64,7 @@ const useStyles = makeStyles((theme) => ({
             marginRight: "20px",
             fontSize: "15px",
             fontWeight: "500",
+            cursor: "pointer",
         },
         "& h3": {
             marginLeft: "3px",
@@ -128,6 +130,7 @@ const useStyles = makeStyles((theme) => ({
 const TopBar = (props) => {
     const classes = useStyles();
     const theme = useTheme();
+    const navigate = useNavigate();
     const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
     const [openNav, setOpenNav] = useState()
@@ -145,10 +148,16 @@ const TopBar = (props) => {
             </div>
             <div className={classes.topMBar} >
                 <div className={classes.leftBar} >
-                    <img className={classes.logoSty} src={mainLogo} alt="logo" />
-                    <h3>RepairsCard</h3>
+                    <div
+                        onClick={() => { navigate("/") }}
+                        style={{ display: "flex", alignItems: "center", cursor: "pointer" }}
+                    >
+                        <img className={classes.logoSty} src={mainLogo} alt="logo" />
+                        <h3>RepairsCard</h3>
+                    </div>
+
                     {isMobile ? null : (<>
-                        <p>Home</p>
+                        <p onClick={() => { navigate("/") }} >Home</p>
                         <p>About us</p>
                         <p>Affiliate</p>
                         <p>Help</p>

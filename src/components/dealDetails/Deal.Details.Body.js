@@ -1,19 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import DetailsCard from "./Details.Card";
-import { useParams } from "react-router-dom";
 import { carDataArr } from "../dummyData"
 import DriverInformationCard from "./Driver.Information.Card";
 import SummaryChargesCard from "./SummaryCharges.Card";
-import { Paper } from "@material-ui/core";
+import { IconButton, Paper } from "@material-ui/core";
 import Contact from "./Contact";
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 import Review from "./Review";
-
+import KeyboardBackspaceIcon from '@material-ui/icons/KeyboardBackspace';
+import { useParams, useNavigate } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        padding: "30px 100px",
+        padding: "15px 100px 30px",
         [theme.breakpoints.down("md")]: {
             padding: "15px 20px",
         },
@@ -114,6 +114,7 @@ const useStyles = makeStyles((theme) => ({
 const DealDetailsBody = (props) => {
     const classes = useStyles();
     const { dealId } = useParams();
+    const navigate = useNavigate();
 
     const [cardData, setCardData] = useState({})
 
@@ -132,6 +133,12 @@ const DealDetailsBody = (props) => {
 
     return (
         <div className={classes.root}>
+            <IconButton
+                style={{ marginBottom: "10px", marginLeft: "-15px" }}
+                onClick={() => { navigate(-1) }}
+            >
+                <KeyboardBackspaceIcon style={{ fontSize: "32" }} />
+            </IconButton>
             <p className={classes.topText} >
                 <b>Alomost Done!</b> Enter your details and complete your booking now.
             </p>

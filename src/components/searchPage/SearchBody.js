@@ -17,6 +17,8 @@ import { filterData } from "../filterData"
 import SearchResult from "./Search.Result";
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import FilterListIcon from '@material-ui/icons/FilterList';
+import { useLocation } from "react-router-dom";
+import queryString from "query-string";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -295,8 +297,10 @@ const useStyles = makeStyles((theme) => ({
 const SearchBody = (props) => {
     const classes = useStyles();
     const theme = useTheme()
+    const location = useLocation()
+    const params = queryString.parse(location.search);
 
-    const [showPage, setShowPage] = useState("Parts")
+    const [showPage, setShowPage] = useState("")
     const [license, setLicense] = useState("")
     const [vin, setVIN] = useState("")
     const [vehicle, setVehicle] = useState("")
@@ -313,6 +317,10 @@ const SearchBody = (props) => {
 
 
     const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+
+    useEffect(() => {
+        setShowPage(params?.type)
+    }, [params])
 
     useEffect(() => {
         const carTypeData = filterData?.carType
@@ -396,8 +404,6 @@ const SearchBody = (props) => {
         ]
         setPrices(pricesFilter)
     }, [filterData])
-
-
 
 
     return (
