@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Avatar, Paper, TextField } from "@material-ui/core";
-import InputAdornment from '@material-ui/core/InputAdornment';
-import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import StarRateIcon from '@material-ui/icons/StarRate';
 import ThumbUpIcon from '@material-ui/icons/ThumbUp';
 
@@ -10,7 +8,10 @@ const useStyles = makeStyles((theme) => ({
     root: {
         padding: "25px",
         marginTop: "30px",
-        borderRadius: "10px"
+        borderRadius: "10px",
+        [theme.breakpoints.down('xs')]: {
+            padding: "15px",
+        }
     },
     topBar: {
         width: "100%",
@@ -29,11 +30,21 @@ const useStyles = makeStyles((theme) => ({
         "& p": {
             fontSize: "16px",
             color: "gray"
+        },
+        [theme.breakpoints.down('xs')]: {
+            "& h3": {
+                fontSize: "20px"
+            },
         }
     },
     ratingStarCont: {
         display: "flex",
-        alignItems: "center"
+        alignItems: "center",
+        [theme.breakpoints.down('xs')]: {
+            flexDirection: "column",
+            justifyContent: "flex-start",
+            alignItems: "flex-start"
+        }
     },
     starsCont: {
         display: "flex",
@@ -113,13 +124,15 @@ const Review = (props) => {
                 <div className={classes.reviewRatingCont} >
                     <h3>Customer Reviews</h3>
                     <div className={classes.ratingStarCont} >
-                        <h2>5.0</h2>
-                        <div className={classes.starsCont} >
-                            <StarRateIcon />
-                            <StarRateIcon />
-                            <StarRateIcon />
-                            <StarRateIcon />
-                            <StarRateIcon />
+                        <div style={{ display: "flex", alignItems: "center" }} >
+                            <h2>5.0</h2>
+                            <div className={classes.starsCont} >
+                                <StarRateIcon />
+                                <StarRateIcon />
+                                <StarRateIcon />
+                                <StarRateIcon />
+                                <StarRateIcon />
+                            </div>
                         </div>
                         <p>16 reviews</p>
                     </div>
@@ -208,9 +221,6 @@ const Review = (props) => {
                     Maecenas at est sed velit accumsan dictum. Vestibulum lobortis faucibus nisl quis sodales. Nam justo augue, lacinia vel nisi tincidunt, vestibulum porttitor nulla.Aliquam quis porta risus, et tristique orci. Nulla ac purus euismod, facilisis nunc id, consequat mauris. Curabitur volutpat tellus id odio feugiat fringilla. Praesent at dolor velit..... More.
                 </p>
             </div>
-
-
-
         </Paper>
     );
 };

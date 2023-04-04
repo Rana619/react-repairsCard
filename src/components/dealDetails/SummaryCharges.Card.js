@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Paper, TextField } from "@material-ui/core";
-import { useParams } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -13,7 +12,10 @@ const useStyles = makeStyles((theme) => ({
         padding: "25px",
         fontSize: "22px",
         fontWeight: "700",
-        borderBottom: "1px solid gray"
+        borderBottom: "1px solid gray",
+        [theme.breakpoints.down('xs')]: {
+            padding: "15px",
+        }
     },
     text2Cont: {
         padding: "25px",
@@ -25,6 +27,9 @@ const useStyles = makeStyles((theme) => ({
             alignItems: "center",
             justifyContent: "space-between",
             marginBottom: "10px"
+        },
+        [theme.breakpoints.down('xs')]: {
+            padding: "15px",
         }
     },
     text4Cont: {
@@ -34,6 +39,9 @@ const useStyles = makeStyles((theme) => ({
             alignItems: "center",
             justifyContent: "space-between",
             marginBottom: "10px"
+        },
+        [theme.breakpoints.down('xs')]: {
+            padding: "15px",
         }
     },
     text3Cont: {
@@ -42,7 +50,10 @@ const useStyles = makeStyles((theme) => ({
         justifyContent: "space-between",
         padding: "15px 25px",
         borderBottom: "1px solid gray",
-        color: "#00AA00"
+        color: "#00AA00",
+        [theme.breakpoints.down('xs')]: {
+            padding: "15px",
+        }
     },
     lineThroughText: {
         color: "#E50000",
@@ -52,9 +63,6 @@ const useStyles = makeStyles((theme) => ({
 
 const SummaryChargesCard = (props) => {
     const classes = useStyles();
-
-
-
 
     return (
         <Paper elevation={3} className={classes.root}>
@@ -67,7 +75,7 @@ const SummaryChargesCard = (props) => {
                     <p>1 week x ₹25012.60</p>
                     <p>₹25012.60</p>
                 </div>
-                <div>
+                <div style={{ marginBottom: "0px" }} >
                     <p>Taxes and fees</p>
                     <p>₹6627.50</p>
                 </div>

@@ -9,7 +9,10 @@ const useStyles = makeStyles((theme) => ({
     root: {
         padding: "25px",
         width: "100%",
-        borderRadius: "10px"
+        borderRadius: "10px",
+        [theme.breakpoints.down('xs')]: {
+            padding: "15px",
+        }
     },
     topCont: {
         width: "100%",
@@ -18,22 +21,49 @@ const useStyles = makeStyles((theme) => ({
         justifyContent: "space-between",
         paddingBottom: "20px",
         marginBottom: "20px",
-        borderRadius: "1px solid gray"
+        borderRadius: "1px solid gray",
+        [theme.breakpoints.down('xs')]: {
+            flexDirection: "column",
+            justifyContent: "center",
+        }
     },
     imageCont: {
-        width: "35%",
+        width: "34%",
         height: "130px",
         backgroundSize: "cover",
         backgroundPosition: "center",
-        borderRadius: "10px"
+        borderRadius: "10px",
+        [theme.breakpoints.down('md')]: {
+            width: "28%",
+            height: "120px",
+        },
+        [theme.breakpoints.down('xs')]: {
+            width: "100%",
+        }
     },
     nameCont: {
         width: "30%",
-        padding: "10px 20px"
+        padding: "10px 20px",
+        [theme.breakpoints.down('md')]: {
+            width: "33%",
+            padding: "10px",
+        },
+        [theme.breakpoints.down('xs')]: {
+            width: "100%",
+        }
     },
     feturesCont: {
-        width: "30%",
-        padding: "10px 20px"
+        width: "33%",
+        padding: "10px 20px",
+        [theme.breakpoints.down('md')]: {
+            width: "36%",
+            padding: "10px",
+        },
+        [theme.breakpoints.down('xs')]: {
+            width: "100%",
+            display: "flex",
+            flexWrap: "wrap",
+        }
     },
     bottomCont: {
         width: "100%",
@@ -41,7 +71,11 @@ const useStyles = makeStyles((theme) => ({
         alignItems: "flex-start",
         justifyContent: "space-between",
         backgroundColor: "#E7EDFF",
-        borderRadius: "15px"
+        borderRadius: "15px",
+        [theme.breakpoints.down('xs')]: {
+            flexDirection: "column",
+            justifyContent: "center",
+        }
     },
     dateCont: {
         width: "43%",
@@ -57,6 +91,14 @@ const useStyles = makeStyles((theme) => ({
         "& h4": {
             fontSize: "14px",
             fontWeight: "450"
+        },
+        [theme.breakpoints.down('md')]: {
+            width: "48%",
+            padding: "20px",
+        },
+        [theme.breakpoints.down('xs')]: {
+            width: "100%",
+            marginTop: "10px"
         }
     },
     fCont: {
@@ -84,6 +126,9 @@ const useStyles = makeStyles((theme) => ({
             marginLeft: "10px",
             fontSize: "14px",
             fontWeight: "400"
+        },
+        [theme.breakpoints.down('xs')]: {
+            marginRight: "15px"
         }
     },
 }));

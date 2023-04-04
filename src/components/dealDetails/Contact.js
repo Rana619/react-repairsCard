@@ -11,13 +11,32 @@ const useStyles = makeStyles((theme) => ({
         "& h3": {
             fontSize: "22px",
             marginBottom: "15px"
+        },
+        [theme.breakpoints.down('xs')]: {
+            padding: "15px",
         }
     },
     inputCont: {
         width: "100%",
         display: "flex",
         alignItems: "center",
-        justifyContent: "space-between"
+        justifyContent: "space-between",
+        [theme.breakpoints.down('xs')]: {
+            flexDirection: "column",
+        }
+    },
+    phNo: {
+        width: "65%",
+        [theme.breakpoints.down('xs')]: {
+            width: "100%",
+        }
+    },
+    codeCont: {
+        width: "33%",
+        [theme.breakpoints.down('xs')]: {
+            width: "100%",
+            marginBottom: "15px"
+        }
     }
 }));
 
@@ -47,13 +66,13 @@ const Contact = (props) => {
                     InputProps={{
                         endAdornment: <InputAdornment position="end" > <CheckCircleIcon style={{ color: "#00AA00" }} /> </InputAdornment>
                     }}
-                    style={{ width: "33%" }}
+                    className={classes.codeCont}
                 />
                 <TextField
                     id="outlined-basic"
                     label="Mobile Phone Number *"
                     variant="outlined"
-                    style={{ width: "65%" }}
+                    className={classes.phNo}
                 />
             </div>
         </Paper>

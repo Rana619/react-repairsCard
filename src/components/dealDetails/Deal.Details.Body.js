@@ -6,6 +6,7 @@ import DriverInformationCard from "./Driver.Information.Card";
 import SummaryChargesCard from "./SummaryCharges.Card";
 import { IconButton, Paper } from "@material-ui/core";
 import Contact from "./Contact";
+import { useTheme, useMediaQuery } from "@material-ui/core";
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 import Review from "./Review";
 import KeyboardBackspaceIcon from '@material-ui/icons/KeyboardBackspace';
@@ -27,19 +28,31 @@ const useStyles = makeStyles((theme) => ({
     topText: {
         width: "450px",
         fontSize: "22px",
-        fontWeight: "450"
+        fontWeight: "450",
+        [theme.breakpoints.down('xs')]: {
+            width: "100%",
+        }
     },
     cardsMainCont: {
         display: "flex",
         alignItems: "flex-start",
         justifyContent: "space-between",
-        marginTop: "30px"
+        marginTop: "30px",
+        [theme.breakpoints.down('sm')]: {
+            justifyContent: "center",
+        }
     },
     leftSide: {
-        width: "58%"
+        width: "58%",
+        [theme.breakpoints.down('sm')]: {
+            width: "100%",
+        }
     },
     rightSide: {
-        width: "39%"
+        width: "39%",
+        [theme.breakpoints.down('sm')]: {
+            display: "none"
+        }
     },
     greenCard: {
         padding: "15px 35px",
@@ -51,6 +64,9 @@ const useStyles = makeStyles((theme) => ({
         },
         "& h3": {
             fontSize: "17px"
+        },
+        [theme.breakpoints.down('xs')]: {
+            padding: "15px 20px", 
         }
     },
     ntext: {
@@ -65,6 +81,9 @@ const useStyles = makeStyles((theme) => ({
         "& h3": {
             fontSize: "22px",
             marginBottom: "8px"
+        },
+        [theme.breakpoints.down('xs')]: {
+            padding: "15px",
         }
     },
     addSeats: {
@@ -76,6 +95,9 @@ const useStyles = makeStyles((theme) => ({
         fontSize: "18px",
         marginTop: "30px",
         borderRadius: "10px",
+        [theme.breakpoints.down('xs')]: {
+            padding: "15px",
+        }
     },
     importantInfoCont: {
         padding: "25px",
@@ -89,6 +111,10 @@ const useStyles = makeStyles((theme) => ({
         },
         "& li": {
             fontSize: "14px"
+        },
+        [theme.breakpoints.down('xs')]: {
+            padding: "15px",
+            paddingLeft: "40px",
         }
     },
     tcText: {
@@ -114,12 +140,12 @@ const useStyles = makeStyles((theme) => ({
 const DealDetailsBody = (props) => {
     const classes = useStyles();
     const { dealId } = useParams();
+    const theme = useTheme()
     const navigate = useNavigate();
 
     const [cardData, setCardData] = useState({})
 
-    console.log(dealId)
-    console.log(cardData)
+    const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
     useEffect(() => {
         carDataArr.map((data) => {
@@ -148,6 +174,18 @@ const DealDetailsBody = (props) => {
                     <DetailsCard
                         cardData={cardData}
                     />
+
+                    {isMobile && (<>
+                        <div className={classes.greenCard} style={{marginTop: "30px"}} >
+                            <p>Keep up the good work!</p>
+                            <h3>You're on your way to getting a great deal.</h3>
+                        </div>
+                        <SummaryChargesCard />
+
+                        <p className={classes.ntext} >Prices in INR. Prices include all <a>taxes and fees</a></p>
+                        <p className={classes.ntext} style={{ marginTop: "10px" }} >Payment of 382.45 USD will be made in Budget Rent a Car's local currency at the time of rental. The INR estimates provided are based on the current exchange rate. Budget Rent a Car will determine the final total.</p>
+                    </>)}
+
                     <DriverInformationCard />
                     <Paper elevation={3} className={classes.payCont} >
                         <h3>Payment</h3>

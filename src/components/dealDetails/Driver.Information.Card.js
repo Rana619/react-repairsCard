@@ -10,7 +10,10 @@ const useStyles = makeStyles((theme) => ({
         padding: "25px",
         width: "100%",
         borderRadius: "10px",
-        marginTop: "30px"
+        marginTop: "30px",
+        [theme.breakpoints.down('xs')]: {
+            padding: "15px",
+        }
     },
     topCont: {
         width: "100%",
