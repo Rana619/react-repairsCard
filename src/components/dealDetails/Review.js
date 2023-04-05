@@ -3,6 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import { Avatar, Paper, TextField } from "@material-ui/core";
 import StarRateIcon from '@material-ui/icons/StarRate';
 import ThumbUpIcon from '@material-ui/icons/ThumbUp';
+import ShowLessShowMore from "../commonComponents/ShowLess.ShowMore";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -160,7 +161,10 @@ const Review = (props) => {
                     </div>
                 </div>
                 <p className={classes.reviewText} >
-                    Maecenas at est sed velit accumsan dictum. Vestibulum lobortis faucibus nisl quis sodales. Nam justo augue, lacinia vel nisi tincidunt, vestibulum porttitor nulla.Aliquam quis porta risus, et tristique orci. Nulla ac purus euismod, facilisis nunc id, consequat mauris. Curabitur volutpat tellus id odio feugiat fringilla. Praesent at dolor velit..... More.
+                    <ShowLessShowMore
+                        text={"Maecenas at est sed velit accumsan dictum. Vestibulum lobortis faucibus nisl quis sodales. Nam justo augue, lacinia vel nisi tincidunt, vestibulum porttitor nulla.Aliquam quis porta risus, et tristique orci. Nulla ac purus euismod, facilisis nunc id, consequat mauris. Curabitur volutpat tellus id odio feugiat fringilla. Praesent at dolor velit..... More. Maecenas at est sed velit accumsan dictum. Vestibulum lobortis faucibus nisl quis sodales. Nam justo augue, lacinia vel nisi tincidunt, vestibulum porttitor nulla.Aliquam quis porta risus, et tristique orci. Nulla ac purus euismod, facilisis nunc id, consequat mauris. Curabitur volutpat tellus id odio feugiat fringilla. Praesent at dolor velit..... More."}
+                        limit={280}
+                    />
                 </p>
                 <div className={classes.likeCont} >
                     <ThumbUpIcon />
@@ -190,8 +194,10 @@ const Review = (props) => {
                     </div>
                 </div>
                 <p className={classes.reviewText} >
-                    Maecenas at est sed velit accumsan dictum. Vestibulum lobortis faucibus nisl quis sodales. Nam justo augue, lacinia vel nisi tincidunt, vestibulum porttitor nulla.Aliquam quis porta risus, et tristique orci. Nulla ac purus euismod, facilisis nunc id, consequat mauris. Curabitur volutpat tellus id odio feugiat fringilla. Praesent at dolor velit..... More.
-                </p>
+                    <ShowLessShowMore
+                        text={"Maecenas at est sed velit accumsan dictum. Vestibulum lobortis faucibus nisl quis sodales. Nam justo augue, lacinia vel nisi tincidunt, vestibulum porttitor nulla.Aliquam quis porta risus, et tristique orci. Nulla ac purus euismod, facilisis nunc id, consequat mauris. Curabitur volutpat tellus id odio feugiat fringilla. Praesent at dolor velit..... More. Maecenas at est sed velit accumsan dictum. Vestibulum lobortis faucibus nisl quis sodales. Nam justo augue, lacinia vel nisi tincidunt, vestibulum porttitor nulla.Aliquam quis porta risus, et tristique orci. Nulla ac purus euismod, facilisis nunc id, consequat mauris. Curabitur volutpat tellus id odio feugiat fringilla. Praesent at dolor velit..... More."}
+                        limit={280}
+                    />                </p>
                 <div className={classes.likeCont} >
                     <ThumbUpIcon />
                     <p>Like</p>
@@ -218,7 +224,10 @@ const Review = (props) => {
                     </div>
                 </div>
                 <p className={classes.reviewText} >
-                    Maecenas at est sed velit accumsan dictum. Vestibulum lobortis faucibus nisl quis sodales. Nam justo augue, lacinia vel nisi tincidunt, vestibulum porttitor nulla.Aliquam quis porta risus, et tristique orci. Nulla ac purus euismod, facilisis nunc id, consequat mauris. Curabitur volutpat tellus id odio feugiat fringilla. Praesent at dolor velit..... More.
+                    <ShowLessShowMore
+                        text={"Maecenas at est sed velit accumsan dictum. Vestibulum lobortis faucibus nisl quis sodales. Nam justo augue, lacinia vel nisi tincidunt, vestibulum porttitor nulla.Aliquam quis porta risus, et tristique orci. Nulla ac purus euismod, facilisis nunc id, consequat mauris. Curabitur volutpat tellus id odio feugiat fringilla. Praesent at dolor velit..... More. Maecenas at est sed velit accumsan dictum. Vestibulum lobortis faucibus nisl quis sodales. Nam justo augue, lacinia vel nisi tincidunt, vestibulum porttitor nulla.Aliquam quis porta risus, et tristique orci. Nulla ac purus euismod, facilisis nunc id, consequat mauris. Curabitur volutpat tellus id odio feugiat fringilla. Praesent at dolor velit..... More."}
+                        limit={280}
+                    />
                 </p>
             </div>
         </Paper>

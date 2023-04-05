@@ -4,11 +4,13 @@ import HomePage from './components/homePage/HomePage';
 import SearchPage from './components/searchPage/SearchPage';
 import DealDetails from './components/dealDetails/Deal.Details';
 import './App.css';
+import ScrollToTop from './components/commonComponents/ScrollTop';
 
 function App(props) {
 
   return (
     <Router>
+      <ScrollToTop />
       <Routes>
         <Route exact path='/' element={<HomePage />} />
         <Route exact path='/search' element={<SearchPage />} />

@@ -66,7 +66,7 @@ const useStyles = makeStyles((theme) => ({
             fontSize: "17px"
         },
         [theme.breakpoints.down('xs')]: {
-            padding: "15px 20px", 
+            padding: "15px 20px",
         }
     },
     ntext: {
@@ -176,7 +176,7 @@ const DealDetailsBody = (props) => {
                     />
 
                     {isMobile && (<>
-                        <div className={classes.greenCard} style={{marginTop: "30px"}} >
+                        <div className={classes.greenCard} style={{ marginTop: "30px" }} >
                             <p>Keep up the good work!</p>
                             <h3>You're on your way to getting a great deal.</h3>
                         </div>
