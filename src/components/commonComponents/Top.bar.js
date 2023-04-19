@@ -3,12 +3,18 @@ import EmailIcon from '@material-ui/icons/Email';
 import RoomIcon from '@material-ui/icons/Room';
 import PhoneIcon from '@material-ui/icons/Phone';
 import { makeStyles } from "@material-ui/core/styles";
-import { useTheme, useMediaQuery, ButtonBase } from "@material-ui/core";
+import { useTheme, useMediaQuery, ButtonBase, Button } from "@material-ui/core";
 import mainLogo from "../svgs/mainLogo.svg"
 import MenuIcon from '@material-ui/icons/Menu';
 import CloseIcon from '@material-ui/icons/Close';
 import Drawer from '@material-ui/core/Drawer';
-import { useNavigate } from 'react-router-dom';
+import { useHistory } from "react-router-dom";
+import AuthDialog from "../auth/Auth.Dialog";
+import firebase from "firebase";
+import { useSelector, useDispatch } from "react-redux";
+import Collapse from '@material-ui/core/Collapse';
+import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
+import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -79,6 +85,7 @@ const useStyles = makeStyles((theme) => ({
             marginRight: "20px",
             fontSize: "15px",
             fontWeight: "500",
+            cursor: "pointer",
             color: "#2A65FD"
         }
     },
@@ -124,20 +131,77 @@ const useStyles = makeStyles((theme) => ({
             margin: "5px 0px",
         },
     },
+    collapseCont: {
+        position: "absolute",
+        top: "40px",
+        width: "170px",
+        backgroundColor: "white",
+        left: "0px",
+    },
+    subCont: {
+        display: "flex",
+        alignItems: "flex-start",
+        flexDirection: "column",
+        padding: "10px 0px 0px",
+        marginTop: "-6px",
+        "& .MuiButton-root": {
+            width: "100%",
+            paddingTop: "4px",
+            paddingBottom: "4px",
+            marginBottom: "6px",
+            paddingLeft: "15px"
+        },
+        "& .MuiButton-label": {
+            color: "gray",
+            fontSize: "15px",
+            textTransform: "capitalize",
+            display: "flex",
+            justifyContent: "flex-start"
+        }
+    },
 }));
 
 
 const TopBar = (props) => {
     const classes = useStyles();
     const theme = useTheme();
-    const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const history = useHistory();
     const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
+    const { user } = useSelector((state) => state.auth);
+
     const [openNav, setOpenNav] = useState()
+    const [openDialog, setOpenDialog] = useState(false)
+    const [signPage, setSignPage] = useState("signin")
+    const [isSignin, setIsSignin] = useState(false)
+    const [openSubCont, setOpenSubCont] = useState(false)
+
+    const handleClose = () => {
+        setOpenDialog(false)
+    }
 
     const handleDrawerToggle = () => {
         setOpenNav(!openNav)
     }
+
+    const logout = () => {
+        firebase.auth().signOut()
+            .then(function () {
+                dispatch({
+                    type: "REMOVE_AUTH_USER",
+                });
+
+                localStorage.removeItem("token");
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    };
+
+
+
+
 
     return (
         <div className={classes.root}>
@@ -149,7 +213,7 @@ const TopBar = (props) => {
             <div className={classes.topMBar} >
                 <div className={classes.leftBar} >
                     <div
-                        onClick={() => { navigate("/") }}
+                        onClick={() => { history("/") }}
                         style={{ display: "flex", alignItems: "center", cursor: "pointer" }}
                     >
                         <img className={classes.logoSty} src={mainLogo} alt="logo" />
@@ -157,7 +221,7 @@ const TopBar = (props) => {
                     </div>
 
                     {isMobile ? null : (<>
-                        <p onClick={() => { navigate("/") }} >Home</p>
+                        <p onClick={() => { history("/") }} >Home</p>
                         <p>About us</p>
                         <p>Affiliate</p>
                         <p>Help</p>
@@ -170,9 +234,45 @@ const TopBar = (props) => {
                             onClick={() => { setOpenNav(true) }}
                         />
                     ) : (<>
-                        <p>Account</p>
-                        <p>Login</p>
-                        <p>Signup</p>
+                        {user?._id ? (
+                            <div style={{ position: 'relative' }} >
+                                <p onClick={() => { setOpenSubCont(!openSubCont) }} >
+                                    {user?.displayName}
+                                    {openSubCont ? (
+                                        <KeyboardArrowUpIcon style={{ marginLeft: "5px", marginBottom: "-7px" }} />
+                                    ) : (
+                                        <KeyboardArrowDownIcon style={{ marginLeft: "5px", marginBottom: "-7px" }} />
+                                    )}
+                                </p>
+                                <div className={classes.collapseCont} >
+                                    <Collapse in={openSubCont} collapsedSize={0}>
+                                        <div className={classes.subCont} >
+                                            <Button
+                                                onClick={() => { setOpenSubCont(false) }}
+                                            >Account</Button>
+                                            <Button
+                                                onClick={() => { setOpenSubCont(false) }}
+                                            >Orders</Button>
+                                            <Button
+                                                onClick={() => {
+                                                    setOpenSubCont(false)
+                                                    logout()
+                                                }}
+                                            >Log Out</Button>
+                                        </div>
+                                    </Collapse>
+                                </div>
+                            </div>
+                        ) : (<>
+                            <p onClick={() => {
+                                setIsSignin(true)
+                                setOpenDialog(true)
+                            }} >Login</p>
+                            <p onClick={() => {
+                                setIsSignin(false)
+                                setOpenDialog(true)
+                            }} >Signup</p>
+                        </>)}
                         <button className={classes.btnSty} >
                             Book  An Appointment
                         </button>
@@ -211,16 +311,35 @@ const TopBar = (props) => {
                 <ButtonBase className={classes.navDrawerBtn}>
                     Account
                 </ButtonBase>
-                <ButtonBase className={classes.navDrawerBtn}>
+                <ButtonBase
+                    className={classes.navDrawerBtn}
+                    onClick={() => {
+                        setIsSignin(true)
+                        setOpenDialog(true)
+                    }}
+                >
                     Login
                 </ButtonBase>
-                <ButtonBase className={classes.navDrawerBtn}>
+                <ButtonBase
+                    className={classes.navDrawerBtn}
+                    onClick={() => {
+                        setIsSignin(false)
+                        setOpenDialog(true)
+                    }}
+                >
                     Signup
                 </ButtonBase>
                 <button className={classes.btnSty} style={{ marginTop: "20px" }} >
                     Book  An Appointment
                 </button>
             </Drawer>
+
+            <AuthDialog
+                openDialog={openDialog}
+                handleClose={handleClose}
+                isSignin={isSignin}
+                setIsSignin={setIsSignin}
+            />
         </div>
     );
 };

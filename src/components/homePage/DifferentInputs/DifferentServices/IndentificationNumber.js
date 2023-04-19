@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { TextField, Button } from '@material-ui/core';
-import { useNavigate } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
     singleFullInput: {
@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
 
 const IdentificationNumber = (props) => {
     const classes = useStyles();
-    const navigate = useNavigate();
+    const history = useHistory();
 
     const [vin, setVin] = useState("")
     const [desc, setDesc] = useState("")
@@ -42,7 +42,7 @@ const IdentificationNumber = (props) => {
         const searchParams = new URLSearchParams(data);
         const url = "search/?" + searchParams;
 
-        navigate(url)
+        history.push(url)
     }
 
     return (

@@ -4,7 +4,7 @@ import PersonIcon from '@material-ui/icons/Person';
 import LocalMallIcon from '@material-ui/icons/LocalMall';
 import CheckIcon from '@material-ui/icons/Check';
 import LockIcon from '@material-ui/icons/Lock';
-import { useNavigate } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -215,12 +215,12 @@ const useStyles = makeStyles((theme) => ({
 
 const Card = ({ cardData }) => {
     const classes = useStyles();
-    const navigate = useNavigate();
+    const history = useHistory();
 
 
     return (
         <div className={classes.root} >
-            <div className={classes.leftPart} onClick={() => { navigate(`/deal-details/${cardData?._id}`) }} >
+            <div className={classes.leftPart} onClick={() => { history.push(`/deal-details/${cardData?._id}`) }} >
                 <img src={cardData?.photo} />
 
                 <h3>{cardData?.title}</h3>
@@ -230,7 +230,7 @@ const Card = ({ cardData }) => {
                     <div>FEATURED</div>
                 )}
             </div>
-            <div className={classes.midPart} onClick={() => { navigate(`/deal-details/${cardData?._id}`) }} >
+            <div className={classes.midPart} onClick={() => { history.push(`/deal-details/${cardData?._id}`) }} >
                 <h3>{cardData?.name}</h3>
                 <p>{cardData?.name}</p>
 

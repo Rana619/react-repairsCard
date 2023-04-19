@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { TextField, Button } from '@material-ui/core';
 import Autocomplete from '@material-ui/lab/Autocomplete';
-import { useNavigate } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
     inputCont: {
@@ -50,7 +50,7 @@ const useStyles = makeStyles((theme) => ({
 
 const Parts = (props) => {
     const classes = useStyles();
-    const navigate = useNavigate();
+    const history = useHistory();
 
     const [license, setLicense] = useState("")
     const [VIN, setVIN] = useState("")
@@ -69,7 +69,7 @@ const Parts = (props) => {
         const searchParams = new URLSearchParams(data);
         const url = "search/?" + searchParams;
 
-        navigate(url)
+        history.push(url)
     }
 
     return (

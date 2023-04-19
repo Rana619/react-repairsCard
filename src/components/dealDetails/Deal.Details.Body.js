@@ -10,7 +10,7 @@ import { useTheme, useMediaQuery } from "@material-ui/core";
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 import Review from "./Review";
 import KeyboardBackspaceIcon from '@material-ui/icons/KeyboardBackspace';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -141,7 +141,7 @@ const DealDetailsBody = (props) => {
     const classes = useStyles();
     const { dealId } = useParams();
     const theme = useTheme()
-    const navigate = useNavigate();
+    const history = useHistory();
 
     const [cardData, setCardData] = useState({})
 
@@ -161,7 +161,7 @@ const DealDetailsBody = (props) => {
         <div className={classes.root}>
             <IconButton
                 style={{ marginBottom: "10px", marginLeft: "-15px" }}
-                onClick={() => { navigate(-1) }}
+                onClick={() => {  history.goBack(); }}
             >
                 <KeyboardBackspaceIcon style={{ fontSize: "32" }} />
             </IconButton>
